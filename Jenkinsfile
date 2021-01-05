@@ -43,7 +43,8 @@ pipeline {
 
     stage('Build') {
       steps {
-        echo "------------>Build1<------------"
+        echo "------------>Build<------------"
+        sh 'chmod +x ./gradlew'
         sh './gradlew --b clean compileJava'
       }
     }
@@ -54,7 +55,6 @@ pipeline {
         echo "------------>Unit Tests<------------"
         echo "------------>Cleaning<------------"
         //sh './gradlew --b ./build.gradlew clean'
-        sh 'chmod +x ./gradlew'
         sh './gradlew --b ./build.gradlew clean'
 
 
