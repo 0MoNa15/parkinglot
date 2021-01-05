@@ -45,7 +45,7 @@ pipeline {
       steps {
         echo "------------>Build<------------"
         sh 'chmod +x ./gradlew'
-        sh './gradlew --b clean compileJava'
+        sh './gradlew --b ./build.gradlew clean compileJava'
       }
     }
     
