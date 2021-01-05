@@ -41,12 +41,12 @@ pipeline {
     }
 
 
-    /*stage('Build') {
+    stage('Build') {
       steps {
-        echo "------------>Build<------------"
+        echo "------------>Build1<------------"
         sh 'gradlew --b clean compileJava'
       }
-    }*/
+    }
     
 
     stage('Unit Tests') {
@@ -76,7 +76,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        echo "------------>Build<------------"
+        echo "------------>Build2<------------"
         //Construir sin tarea test que se ejecutó previamente
         //sh 'gradlew --b ./build.gradlew build -x test'
         sh './gradlew --b ./build.gradlew build -x test'
