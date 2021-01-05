@@ -55,12 +55,12 @@ pipeline {
         echo "------------>Cleaning<------------"
         //sh './gradlew --b ./build.gradlew clean'
         sh 'chmod +x ./gradlew'
-        sh './gradlew --b clean'
+        sh './gradlew --b ./build.gradlew clean'
 
 
         echo "------------>test only<------------"
         //sh 'gradlew --b ./build.gradlew test'
-        sh './gradlew --b test'
+        sh './gradlew --b ./build.gradlew test'
       }
     }
 
@@ -79,7 +79,7 @@ pipeline {
         echo "------------>Build<------------"
         //Construir sin tarea test que se ejecutó previamente
         //sh 'gradlew --b ./build.gradlew build -x test'
-        sh './gradlew --b build -x test'
+        sh './gradlew --b ./build.gradlew build -x test'
       }
     }  
   }
