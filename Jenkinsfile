@@ -25,24 +25,20 @@ pipeline {
       	// Conexión al repositorio
         echo "------------>Checkout<------------"
         checkout([
-			$class: 'GitSCM', 
-			branches: [[name: '*/main']], 
-			doGenerateSubmoduleConfigurations: false, 
-			extensions: [], 
-			gitTool: 'Default', 
-			submoduleCfg: [], 
-			userRemoteConfigs: [[
-				credentialsId: 'GitHub_Zorayda', 
-				url:'https://github.com/Zorayda/parkinglot.git'
-			]]
-		])
-
+    			$class: 'GitSCM', 
+    			branches: [[name: '*/main']], 
+    			doGenerateSubmoduleConfigurations: false, 
+    			extensions: [], 
+    			gitTool: 'Default', 
+    			submoduleCfg: [], 
+    			userRemoteConfigs: [[
+    				credentialsId: 'GitHub_Zorayda', 
+    				url:'https://github.com/Zorayda/parkinglot.git'
+    			]]
+    		])
       }
     }
 
-
-    
-    
 
     stage('Unit Tests') {
       steps{
@@ -65,9 +61,11 @@ pipeline {
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
  			    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-          //sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+          sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
+      }
     }
+
 
     stage('Build') {
       steps {
