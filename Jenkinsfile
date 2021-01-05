@@ -45,7 +45,7 @@ pipeline {
       steps {
         echo "------------>Build<------------"
         sh 'chmod +x ./gradlew'
-        sh './gradlew --b clean compileJava'
+        sh './gradlew clean compileJava'
       }
     }
     
@@ -55,12 +55,12 @@ pipeline {
         echo "------------>Unit Tests<------------"
         echo "------------>Cleaning<------------"
         //sh './gradlew --b ./build.gradlew clean'
-        sh './gradlew --b clean'
+        sh './gradlew clean'
 
 
         echo "------------>test only<------------"
         //sh 'gradlew --b ./build.gradlew test'
-        sh './gradlew --b test'
+        sh './gradlew test'
       }
     }
 
@@ -71,7 +71,7 @@ pipeline {
         withSonarQubeEnv('Sonar') {
  			    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
         }
-        sh './gradlew --b build -x test'
+        sh './gradlew build -x test'
       }
     }
   }
