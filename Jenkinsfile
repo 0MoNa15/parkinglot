@@ -44,7 +44,7 @@ pipeline {
     stage('Build') {
       steps {
         echo "------------>Build1<------------"
-        sh 'gradlew --b clean compileJava'
+        sh './gradlew --b clean compileJava'
       }
     }
     
