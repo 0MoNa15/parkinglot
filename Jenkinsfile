@@ -53,8 +53,9 @@ pipeline {
       steps{
         echo "------------>Unit Tests<------------"
         echo "------------>Cleaning<------------"
-        sh './gradle --b ./build.gradlew clean'
-        //sh './gradlew --b clean'
+        //sh './gradlew --b ./build.gradlew clean'
+        sh 'chmod +x ./gradlew'
+        sh './gradlew --b clean'
 
 
         echo "------------>test only<------------"
