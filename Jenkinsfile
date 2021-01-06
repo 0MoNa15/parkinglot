@@ -80,8 +80,6 @@ pipeline {
     success {
       echo 'This will run only if successful'
       mail (to: 'zorayda.gutierrez@ceiba.com.co',subject: "SUCCESS Pipeline:${currentBuild.fullDisplayName}",body: "Hi Ceiba <3")
-      
-      //junit 'build/test-results/test/*.xml' //→ RUTA DE TUS ARCHIVOS .XML
       junit '**/test-results/testDebugUnitTest/*.xml'
 
     }
