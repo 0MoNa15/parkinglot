@@ -79,8 +79,11 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'build/test-results/test/*.xml' //→ RUTA DE TUS ARCHIVOS .XML
       mail (to: 'zorayda.gutierrez@ceiba.com.co',subject: "SUCCESS Pipeline:${currentBuild.fullDisplayName}",body: "Hi Ceiba <3")
+      
+      //junit 'build/test-results/test/*.xml' //→ RUTA DE TUS ARCHIVOS .XML
+      junit '**/test-results/testDebugUnitTest/*.xml'
+
     }
     failure {
       echo 'This will run only if failed'
