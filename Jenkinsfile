@@ -45,12 +45,10 @@ pipeline {
         echo "------------>Unit Tests<------------"
         sh 'chmod +x ./gradlew'
         echo "------------>Cleaning<------------"
-        //sh './gradlew --b ./build.gradlew clean'
         sh './gradlew clean'
 
 
         echo "------------>test only<------------"
-        //sh 'gradlew --b ./build.gradlew test'
         sh './gradlew test'
       }
     }
@@ -60,7 +58,6 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
- 			    //sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
           sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
       }
@@ -71,8 +68,6 @@ pipeline {
       steps {
         echo "------------>Build<------------"
         sh './gradlew build -x test'
-        //sh './gradlew build'
-        //sh './gradlew clean compileJava'
       }
     }
   }
@@ -85,7 +80,7 @@ pipeline {
     success {
       echo 'This will run only if successful'
       junit 'build/test-results/test/*.xml' //→ RUTA DE TUS ARCHIVOS .XML
-      mail (to: 'zorayda.gutierrez@ceiba.com.co',subject: "SUCCESS Pipeline:${currentBuild.fullDisplayName}",body: "Hi Ceiba <3 ${env.BUILD_URL}")
+      mail (to: 'zorayda.gutierrez@ceiba.com.co',subject: "SUCCESS Pipeline:${currentBuild.fullDisplayName}",body: "Hi Ceiba <3")
     }
     failure {
       echo 'This will run only if failed'
