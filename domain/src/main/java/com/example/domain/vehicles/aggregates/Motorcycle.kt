@@ -1,10 +1,7 @@
 package com.example.domain.vehicles.aggregates
 
-import com.example.domain.vehicles.entities.LicensePlate
+import com.example.domain.vehicles.entities.Vehicle
 
 class Motorcycle(
-    val plateLicensePlate: LicensePlate,
-    val model: String,
-    val color: String,
     val cylinderCapacity: Int
-)
+): Vehicle()
