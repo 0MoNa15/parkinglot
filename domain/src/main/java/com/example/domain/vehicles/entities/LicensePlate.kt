@@ -1,4 +1,6 @@
 package com.example.domain.vehicles.entities
 
-class LicensePlate {
-}
+class LicensePlate (
+    val numberAndLetters: Int,
+    val city: String
+)
