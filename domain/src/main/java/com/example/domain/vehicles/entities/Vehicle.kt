@@ -5,8 +5,8 @@ abstract class Vehicle {
     val INSIDE_PARKING_LOT = "inside_the_parking_lot"
     val OUTSIDE_PARKING_LOT = "outside_the_parking_lot"
 
-    val plateLicensePlate: LicensePlate? = null
-    val model: String? = null
-    val color: String? = null
-    val state: String? = null
+    abstract val plateLicensePlate: LicensePlate
+    abstract var model: String
+    abstract var color: String
+    abstract var state: String
 }

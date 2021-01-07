@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.infrastructure.database.dto.CarDao
 import com.example.infrastructure.database.dto.MotorcycleDao
-import com.example.infrastructure.database.entities.Motorcycle
-import com.example.infrastructure.database.entities.Car
+import com.example.infrastructure.database.entities.MotorcycleEntity
+import com.example.infrastructure.database.entities.CarEntity
 
-@Database(entities = [Car::class, Motorcycle::class], version = 3, exportSchema = false)
+@Database(entities = [CarEntity::class, MotorcycleEntity::class], version = 3, exportSchema = false)
 abstract class AppDataBase : RoomDatabase(){
     abstract fun carDao(): CarDao
     abstract fun motorbikeDao(): MotorcycleDao

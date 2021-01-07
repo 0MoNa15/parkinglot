@@ -5,17 +5,25 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.domain.vehicles.entities.LicensePlate
 
-@Entity(tableName = "car")
-class Car (
-    //  @ColumnInfo nombre de la columna de la tabla en la base de datos
+@Entity(tableName = "motorcycle")
+class MotorcycleEntity (
     @ColumnInfo(name = "licensePlate")
-    var plateLicensePlate: LicensePlate,
+    var licensePlate: String,
+
+    @ColumnInfo(name = "licensePlateCity")
+    var licensePlateCity: String,
 
     @ColumnInfo(name = "model")
     var model: String,
 
     @ColumnInfo(name = "color")
-    var color: String
+    var color: String,
+
+    @ColumnInfo(name = "state")
+    var state: String,
+
+    @ColumnInfo(name = "cylinderCapacity")
+    val cylinderCapacity: Int
 ){
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
