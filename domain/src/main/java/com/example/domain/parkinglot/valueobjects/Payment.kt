@@ -1,4 +1,9 @@
 package com.example.domain.parkinglot.valueobjects
 
-class Payment {
+import java.util.*
+
+class Payment(
+    val amont: Int,
+    val date: Date
+) {
 }

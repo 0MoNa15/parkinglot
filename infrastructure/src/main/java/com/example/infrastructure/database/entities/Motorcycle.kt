@@ -8,7 +8,10 @@ import com.example.domain.vehicles.entities.LicensePlate
 @Entity(tableName = "motorcycle")
 class Motorcycle (
     @ColumnInfo(name = "licensePlate")
-    var licensePlate: LicensePlate,
+    var licensePlate: String,
+
+    @ColumnInfo(name = "licensePlateCity")
+    var licensePlateCity: String,
 
     @ColumnInfo(name = "model")
     var model: String,
