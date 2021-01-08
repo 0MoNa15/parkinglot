@@ -8,4 +8,9 @@ class Car(
     override var model: String,
     override var color: String,
     override var state: String
-): Vehicle()
+): Vehicle(){
+    companion object {
+        const val COST_PER_HOUR = 1000
+        const val COST_PER_DAY = 8000
+    }
+}
