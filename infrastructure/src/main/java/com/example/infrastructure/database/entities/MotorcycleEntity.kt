@@ -7,10 +7,10 @@ import com.example.domain.vehicles.entities.LicensePlate
 
 @Entity(tableName = "motorcycle")
 class MotorcycleEntity (
-    @ColumnInfo(name = "licensePlate")
+    @ColumnInfo(name = "licenseplate")
     var licensePlate: String,
 
-    @ColumnInfo(name = "licensePlateCity")
+    @ColumnInfo(name = "licenseplatecity")
     var licensePlateCity: String,
 
     @ColumnInfo(name = "model")
@@ -22,7 +22,10 @@ class MotorcycleEntity (
     @ColumnInfo(name = "state")
     var state: String,
 
-    @ColumnInfo(name = "cylinderCapacity")
+    @ColumnInfo(name = "dateadmission")
+    var dateOfAdmission: String,
+
+    @ColumnInfo(name = "cylindercapacity")
     val cylinderCapacity: Int
 ){
     @PrimaryKey(autoGenerate = true)

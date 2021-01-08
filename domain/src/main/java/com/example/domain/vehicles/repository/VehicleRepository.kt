@@ -4,14 +4,14 @@ import com.example.domain.vehicles.aggregates.Car
 import com.example.domain.vehicles.aggregates.Motorcycle
 
 interface VehicleRepository {
-    fun updateStatus(licensePlate: String, state: String)
-
-    fun insertCar(carEntity: Car)
+    fun insertCar(car: Car)
+    fun updateStatusCar(car: Car)
     fun getAllCars(): List<Car>
     fun getAmountCar(): Int
-
     fun getCylinderCapacityMotorcycle(id: Int): Int
-    fun insertMotorcycle(carEntity: Motorcycle)
+
+    fun insertMotorcycle(motorcycle: Motorcycle)
+    fun updateStatusMotorcycle(motorcycle: Motorcycle)
     fun getAllMotorcycle(): List<Motorcycle>
     fun getAmountMotorcycle(): Int
 }

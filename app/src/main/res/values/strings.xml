@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ParkingLot</string>
+    <string name="app_name">Parking Attendant</string>
+    <string name="no_autorizado_ingresar">No está autorizado a ingresar</string>
 </resources>

@@ -15,7 +15,8 @@ class VehicleTranslator {
                 car.plateLicensePlate.city,
                 car.model,
                 car.color,
-                car.state
+                car.state,
+                car.dateOfAdmission
             )
         }
 
@@ -35,6 +36,7 @@ class VehicleTranslator {
                 motorcycle.model,
                 motorcycle.color,
                 motorcycle.state,
+                motorcycle.dateOfAdmission,
                 motorcycle.cylinderCapacity
             )
         }
@@ -56,6 +58,7 @@ class VehicleTranslator {
                 motorcycleEntity.model,
                 motorcycleEntity.color,
                 motorcycleEntity.state,
+                motorcycleEntity.dateOfAdmission,
                 motorcycleEntity.cylinderCapacity
             )
         }
@@ -67,7 +70,9 @@ class VehicleTranslator {
                 mLicense,
                 carEntity.model,
                 carEntity.color,
-                carEntity.state)
+                carEntity.state,
+                carEntity.dateOfAdmission
+            )
         }
     }
 }

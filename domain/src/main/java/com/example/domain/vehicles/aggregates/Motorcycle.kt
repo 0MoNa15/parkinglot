@@ -8,6 +8,7 @@ class Motorcycle(
     override var model: String,
     override var color: String,
     override var state: String,
+    override var dateOfAdmission: String,
     val cylinderCapacity: Int
 ): Vehicle(){
     companion object {

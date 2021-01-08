@@ -7,7 +7,8 @@ class Car(
     override val plateLicensePlate: LicensePlate,
     override var model: String,
     override var color: String,
-    override var state: String
+    override var state: String,
+    override var dateOfAdmission: String
 ): Vehicle(){
     companion object {
         const val COST_PER_HOUR = 1000

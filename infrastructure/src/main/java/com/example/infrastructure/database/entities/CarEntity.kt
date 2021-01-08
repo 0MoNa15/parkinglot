@@ -21,7 +21,11 @@ class CarEntity (
     var color: String,
 
     @ColumnInfo(name = "state")
-    var state: String
+    var state: String,
+
+    @ColumnInfo(name = "dateadmission")
+    var dateOfAdmission: String
+
 ){
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

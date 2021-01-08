@@ -11,4 +11,5 @@ abstract class Vehicle {
     abstract var model: String
     abstract var color: String
     abstract var state: String
+    abstract var dateOfAdmission: String
 }
