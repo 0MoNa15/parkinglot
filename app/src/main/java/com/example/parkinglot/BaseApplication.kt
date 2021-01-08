@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.parkinglot
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
@@ -8,7 +8,7 @@ import dagger.hilt.android.HiltAndroidApp
 // vivan hasta que todo_ el app sea destruida por completo
 
 // Contenedor del gráfico de Hilt
-//@HiltAndroidApp
+@HiltAndroidApp
 class BaseApplication: Application() {
 
 }
