@@ -22,10 +22,11 @@ This is a clean architecture app example built with
 - Dagger Hilt
 - Room
 - Navigation Components
-- Cache Strategy (Repository Pattern)
+- Repository Pattern
 - ViewBinding
 - Espresso
 - SONAR
+- DDD
 
 
 # Architecture
