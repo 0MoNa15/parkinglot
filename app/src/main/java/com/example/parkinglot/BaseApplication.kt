@@ -9,6 +9,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 // Contenedor del gráfico de Hilt
 @HiltAndroidApp
-class BaseApplication: Application() {
-
-}
+class BaseApplication: Application()
