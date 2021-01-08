@@ -40,6 +40,14 @@ pipeline {
     }
 
 
+    stage('Build') {
+      steps {
+        echo "------------>Build<------------"
+        sh './gradlew build -x test'
+      }
+    }
+
+
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
@@ -60,14 +68,6 @@ pipeline {
         withSonarQubeEnv('Sonar') {
           sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
-      }
-    }
-
-
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        sh './gradlew build -x test'
       }
     }
   }
