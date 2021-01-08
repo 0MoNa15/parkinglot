@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Parking Attendant</string>
     <string name="no_autorizado_ingresar">No está autorizado a ingresar</string>
+    <string name="ingreso">Ingreso</string>
+    <string name="salida">Salida</string>
+    <string name="vehiculos">Vehiculos</string>
 </resources>
