@@ -4,4 +4,5 @@
     <string name="ingreso">Ingreso</string>
     <string name="salida">Salida</string>
     <string name="vehiculos">Vehiculos</string>
+    <string name="recaudo">Recaudo</string>
 </resources>

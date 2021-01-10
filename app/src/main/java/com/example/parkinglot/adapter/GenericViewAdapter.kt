@@ -13,9 +13,8 @@ import com.example.parkinglot.databinding.ItemBinding
 
 class GenericViewAdapter (
     private val mContext: Context,
-    itemBasicList: List<ItemBasic>
+    private var mList: List<ItemBasic>
 ) : RecyclerView.Adapter<GenericViewAdapter.ViewHolder?>(), View.OnClickListener {
-    private val mList: List<ItemBasic> = itemBasicList
     private var mListener: View.OnClickListener? = null
 
     @NonNull
@@ -50,7 +49,7 @@ class GenericViewAdapter (
 
         fun addItemBasic(itemBasic: ItemBasic) {
             mTitleTextView.text = itemBasic.title
-            mImageView.drawable
+            mImageView.setImageResource(itemBasic.image)
         }
     }
 }
