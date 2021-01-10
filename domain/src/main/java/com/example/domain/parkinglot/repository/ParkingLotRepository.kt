@@ -1,4 +1,4 @@
 package com.example.domain.parkinglot.repository
 
-class ParkingLotRepository {
+interface ParkingLotRepository {
 }

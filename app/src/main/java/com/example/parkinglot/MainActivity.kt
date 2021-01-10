@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.parkinglot.valueobjects.ItemBasic
-import com.example.parkinglot.adapters.GenericViewAdapter
+import com.example.domain.parkinglot.valueobject.ItemBasic
+import com.example.parkinglot.adapter.GenericViewAdapter
 import com.example.parkinglot.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*

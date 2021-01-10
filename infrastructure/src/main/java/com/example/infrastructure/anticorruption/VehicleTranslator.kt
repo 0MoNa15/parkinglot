@@ -1,10 +1,10 @@
 package com.example.infrastructure.anticorruption
 
-import com.example.domain.vehicles.aggregates.Car
-import com.example.domain.vehicles.aggregates.Motorcycle
-import com.example.domain.vehicles.entities.LicensePlate
-import com.example.infrastructure.database.entities.CarEntity
-import com.example.infrastructure.database.entities.MotorcycleEntity
+import com.example.domain.vehicle.aggregate.Car
+import com.example.domain.vehicle.aggregate.Motorcycle
+import com.example.domain.vehicle.entity.LicensePlate
+import com.example.infrastructure.database.entity.CarEntity
+import com.example.infrastructure.database.entity.MotorcycleEntity
 
 class VehicleTranslator {
 
