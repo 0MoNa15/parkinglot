@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-abstract class VehicleModule {
+abstract class VehicleDiModule {
     @Binds
     abstract fun bindVehicleRepository(parkingImplementationMotorbike: VehicleRepositoryRoom): VehicleRepository
 }

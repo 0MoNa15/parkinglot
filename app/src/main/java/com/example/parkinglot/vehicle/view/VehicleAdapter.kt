@@ -1,4 +1,4 @@
-package com.example.parkinglot.adapter
+package com.example.parkinglot.vehicle.view
 
 class VehicleAdapter(){
 /*class VehicleAdapter(var listVehicle: List<Vehicle>, val context: Context) : RecyclerView.Adapter<VehicleAdapter.ViewHolderVehicle?>() {

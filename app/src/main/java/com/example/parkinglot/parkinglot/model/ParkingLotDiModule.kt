@@ -1,4 +1,4 @@
 package com.example.parkinglot.dimodule
 
-class ParkingLotModule {
+class ParkingLotDiModule {
 }

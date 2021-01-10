@@ -1,4 +1,4 @@
-package com.example.parkinglot
+package com.example.parkinglot.generic
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

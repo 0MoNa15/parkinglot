@@ -1,4 +1,4 @@
-package com.example.parkinglot.adapter
+package com.example.parkinglot.parkinglot.view
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.parkinglot.valueobject.ItemBasic
+import com.example.parkinglot.parkinglot.model.ItemBasic
 import com.example.parkinglot.databinding.ItemBinding
 
 class GenericViewAdapter (

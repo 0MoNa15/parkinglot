@@ -1,4 +1,4 @@
-package com.example.parkinglot.viewmodel
+package com.example.parkinglot.vehicle.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData

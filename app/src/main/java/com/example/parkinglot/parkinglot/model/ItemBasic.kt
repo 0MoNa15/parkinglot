@@ -1,4 +1,4 @@
-package com.example.domain.parkinglot.valueobject
+package com.example.parkinglot.parkinglot.model
 
 class ItemBasic {
     var id: Int = 0

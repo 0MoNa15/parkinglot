@@ -1,4 +1,4 @@
-package com.example.parkinglot
+package com.example.parkinglot.parkinglot.view
 
 import android.os.Bundle
 import android.util.Log
@@ -6,12 +6,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.parkinglot.valueobject.ItemBasic
-import com.example.domain.parkinglot.valueobject.ItemBasic.Companion.POSITION_CAR
-import com.example.domain.parkinglot.valueobject.ItemBasic.Companion.POSITION_INSIDE
-import com.example.domain.parkinglot.valueobject.ItemBasic.Companion.POSITION_OUTSIDE
-import com.example.domain.parkinglot.valueobject.ItemBasic.Companion.POSITION_PAYMENT
-import com.example.parkinglot.adapter.GenericViewAdapter
+import com.example.parkinglot.R
+import com.example.parkinglot.parkinglot.model.ItemBasic
+import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_CAR
+import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_INSIDE
+import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_OUTSIDE
+import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_PAYMENT
 import com.example.parkinglot.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity() {
         manager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         recyclerVehicle.layoutManager = manager
 
-        genericViewAdapter = GenericViewAdapter(this@MainActivity.applicationContext, createList())
+        genericViewAdapter =
+            GenericViewAdapter(
+                this@MainActivity.applicationContext,
+                createList()
+            )
         genericViewAdapter.setOnClickListener(View.OnClickListener {
             val position: Int = recyclerViewList.getChildAdapterPosition(it)
             goFragment(mList[position])
@@ -75,19 +79,23 @@ class MainActivity : AppCompatActivity() {
 
         itemBasicInside.id = POSITION_INSIDE
         itemBasicInside.title = getString(R.string.ingreso)
-        itemBasicInside.image = R.drawable.ic_enter_car_parking_lot
+        itemBasicInside.image =
+            R.drawable.ic_enter_car_parking_lot
 
         itemBasicOutside.id = POSITION_OUTSIDE
         itemBasicOutside.title = getString(R.string.salida)
-        itemBasicOutside.image = R.drawable.ic_logout_car_parking_lot
+        itemBasicOutside.image =
+            R.drawable.ic_logout_car_parking_lot
 
         itemBasicVehicle.id = POSITION_CAR
         itemBasicVehicle.title = getString(R.string.vehiculos)
-        itemBasicVehicle.image = R.drawable.ic_car_parking_lot
+        itemBasicVehicle.image =
+            R.drawable.ic_car_parking_lot
 
         itemBasicMoney.id = POSITION_PAYMENT
         itemBasicMoney.title = getString(R.string.recaudo)
-        itemBasicMoney.image = R.drawable.ic_money_parking_lot
+        itemBasicMoney.image =
+            R.drawable.ic_money_parking_lot
 
         mList.add(itemBasicInside)
         mList.add(itemBasicOutside)
