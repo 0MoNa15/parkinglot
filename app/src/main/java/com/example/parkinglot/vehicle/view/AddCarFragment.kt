@@ -3,7 +3,6 @@ package com.example.parkinglot.vehicle.view
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.AddCarFragmentBinding
 import com.example.parkinglot.vehicle.viewmodel.AddCarViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddCarFragment : Fragment() {
     private lateinit var viewModel: AddCarViewModel
     private lateinit var bindingAddCarFragment: AddCarFragmentBinding
