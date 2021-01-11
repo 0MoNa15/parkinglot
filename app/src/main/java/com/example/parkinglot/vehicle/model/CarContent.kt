@@ -14,14 +14,14 @@ object CarContent {
             if (ITEMS[i] is Car) {
                 addItem(
                     Car(
-                        LicensePlate(ITEMS[i].plateLicensePlate.numberAndLetters, ITEMS[i].plateLicensePlate.city),
+                        LicensePlate(ITEMS[i].plateLicensePlate.id, ITEMS[i].plateLicensePlate.city),
                         ITEMS[i].state,
                         ITEMS[i].dateOfAdmission
                     )
                 )
             } else if(ITEMS[i] is Motorcycle) {
                 addItem(Motorcycle(
-                    LicensePlate(ITEMS[i].plateLicensePlate.numberAndLetters, ITEMS[i].plateLicensePlate.city),
+                    LicensePlate(ITEMS[i].plateLicensePlate.id, ITEMS[i].plateLicensePlate.city),
                     ITEMS[i].state,
                     ITEMS[i].dateOfAdmission,
                     122

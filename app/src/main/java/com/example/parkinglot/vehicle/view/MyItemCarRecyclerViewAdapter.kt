@@ -49,7 +49,7 @@ class MyItemCarRecyclerViewAdapter(
 
         fun addItem(vehicle: Vehicle) {
             titleTextView.text = if (vehicle is Car) mContext.getString(R.string.carro) else mContext.getString(R.string.moto)
-            licensePlateTextView.text = String.format("%s%s%s", vehicle.plateLicensePlate.numberAndLetters, " - ", vehicle.plateLicensePlate.city)
+            licensePlateTextView.text = String.format("%s%s%s", vehicle.plateLicensePlate.id, " - ", vehicle.plateLicensePlate.city)
             stateTextView.text = vehicle.state
             dateTextView.text = vehicle.dateOfAdmission
         }

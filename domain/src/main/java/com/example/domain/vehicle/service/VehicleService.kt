@@ -55,7 +55,7 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
 
     // Para dar ingreso a un vehiculo al parqueadero
     fun enterANewCar(car: Car): Boolean{
-        if (carLimitValidation(repository.getAmountCar()) && licensePlateVerificationForAdmission(car.plateLicensePlate.numberAndLetters)) {
+        if (carLimitValidation(repository.getAmountCar()) && licensePlateVerificationForAdmission(car.plateLicensePlate.id)) {
             repository.updateStatusCar(changeStateInCar(car, INSIDE_PARKING_LOT))
             return true
         }
@@ -74,7 +74,7 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
 
     // Para dar ingreso a un vehiculo al parqueadero
     fun enterANewMotorcycle(motorcycle: Motorcycle): Boolean{
-        if (motorcycleLimitValidation(repository.getAmountMotorcycle()) && licensePlateVerificationForAdmission(motorcycle.plateLicensePlate.numberAndLetters)) {
+        if (motorcycleLimitValidation(repository.getAmountMotorcycle()) && licensePlateVerificationForAdmission(motorcycle.plateLicensePlate.id)) {
             repository.updateStatusMotorcycle(changeStateInMotorCycle(motorcycle, INSIDE_PARKING_LOT))
             return true
         }

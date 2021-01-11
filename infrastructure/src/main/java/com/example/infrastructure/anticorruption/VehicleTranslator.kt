@@ -11,7 +11,7 @@ class VehicleTranslator {
     companion object {
         fun fromModelToEntityCar(car: Car): CarEntity {
             return CarEntity(
-                car.plateLicensePlate.numberAndLetters,
+                car.plateLicensePlate.id,
                 car.plateLicensePlate.city,
                 car.state,
                 car.dateOfAdmission
@@ -29,7 +29,7 @@ class VehicleTranslator {
 
         fun fromModelToEntityMotorcycle(motorcycle: Motorcycle): MotorcycleEntity {
             return MotorcycleEntity(
-                motorcycle.plateLicensePlate.numberAndLetters,
+                motorcycle.plateLicensePlate.id,
                 motorcycle.plateLicensePlate.city,
                 motorcycle.state,
                 motorcycle.dateOfAdmission,

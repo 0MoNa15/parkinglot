@@ -1,7 +1,7 @@
 package com.example.domain.vehicle.entity
 
 class LicensePlate (
-    val numberAndLetters: String,
+    val id: String,
     val city: String
 ){
     companion object {
