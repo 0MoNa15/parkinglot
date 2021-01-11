@@ -13,12 +13,6 @@ class CarEntity (
     @ColumnInfo(name = "licensePlateCity")
     var licensePlateCity: String,
 
-    @ColumnInfo(name = "model")
-    var model: String,
-
-    @ColumnInfo(name = "color")
-    var color: String,
-
     @ColumnInfo(name = "state")
     var state: String,
 

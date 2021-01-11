@@ -13,8 +13,6 @@ class VehicleTranslator {
             return CarEntity(
                 car.plateLicensePlate.numberAndLetters,
                 car.plateLicensePlate.city,
-                car.model,
-                car.color,
                 car.state,
                 car.dateOfAdmission
             )
@@ -33,8 +31,6 @@ class VehicleTranslator {
             return MotorcycleEntity(
                 motorcycle.plateLicensePlate.numberAndLetters,
                 motorcycle.plateLicensePlate.city,
-                motorcycle.model,
-                motorcycle.color,
                 motorcycle.state,
                 motorcycle.dateOfAdmission,
                 motorcycle.cylinderCapacity
@@ -55,8 +51,6 @@ class VehicleTranslator {
 
             return Motorcycle(
                 mLicense,
-                motorcycleEntity.model,
-                motorcycleEntity.color,
                 motorcycleEntity.state,
                 motorcycleEntity.dateOfAdmission,
                 motorcycleEntity.cylinderCapacity
@@ -68,8 +62,6 @@ class VehicleTranslator {
 
             return Car(
                 mLicense,
-                carEntity.model,
-                carEntity.color,
                 carEntity.state,
                 carEntity.dateOfAdmission
             )

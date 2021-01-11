@@ -15,8 +15,6 @@ object CarContent {
                 addItem(
                     Car(
                         LicensePlate(ITEMS[i].plateLicensePlate.numberAndLetters, ITEMS[i].plateLicensePlate.city),
-                        ITEMS[i].model,
-                        ITEMS[i].color,
                         ITEMS[i].state,
                         ITEMS[i].dateOfAdmission
                     )
@@ -24,8 +22,6 @@ object CarContent {
             } else if(ITEMS[i] is Motorcycle) {
                 addItem(Motorcycle(
                     LicensePlate(ITEMS[i].plateLicensePlate.numberAndLetters, ITEMS[i].plateLicensePlate.city),
-                    ITEMS[i].model,
-                    ITEMS[i].color,
                     ITEMS[i].state,
                     ITEMS[i].dateOfAdmission,
                     122

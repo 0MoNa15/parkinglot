@@ -10,8 +10,6 @@ abstract class Vehicle {
     }
 
     abstract val plateLicensePlate: LicensePlate
-    abstract var model: String
-    abstract var color: String
     abstract var state: String
     abstract var dateOfAdmission: String
 }
