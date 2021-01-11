@@ -11,10 +11,10 @@ import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemBinding
 
-class MyItemCarRecyclerViewAdapter(
+class VehicleViewAdapter(
     private val mContext: Context,
     private val values: List<Vehicle>
-) : RecyclerView.Adapter<MyItemCarRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
+) : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>(), View.OnClickListener {
 
     private var mListener: View.OnClickListener? = null
 

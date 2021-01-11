@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".vehicle.view.ItemCarFragment">
+    tools:context=".vehicle.view.VehicleViewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewListCar"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".vehicle.view.ItemCarFragment"
+        tools:context=".vehicle.view.VehicleViewFragment"
         tools:listitem="@layout/fragment_item" />
 
     <Button

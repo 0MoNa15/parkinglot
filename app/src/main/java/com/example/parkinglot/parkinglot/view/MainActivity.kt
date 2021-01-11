@@ -15,7 +15,7 @@ import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_CAR
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_INSIDE
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_OUTSIDE
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_PAYMENT
-import com.example.parkinglot.vehicle.view.ItemCarFragment
+import com.example.parkinglot.vehicle.view.VehicleViewFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             }
             POSITION_CAR -> {
                 Log.i("TEST", ""+ POSITION_CAR)
-                transaction.add(R.id.frameLayoutContainer, ItemCarFragment(), "YOUR_FRAGMENT_STRING_TAG")
+                transaction.add(R.id.frameLayoutContainer, VehicleViewFragment(), "YOUR_FRAGMENT_STRING_TAG")
             }
             POSITION_PAYMENT -> {
                 Log.i("TEST", ""+ POSITION_PAYMENT)

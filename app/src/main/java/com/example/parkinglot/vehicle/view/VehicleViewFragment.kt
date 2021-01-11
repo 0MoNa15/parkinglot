@@ -15,10 +15,10 @@ import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemListBinding
 import com.example.parkinglot.vehicle.model.CarContent
 
-class ItemCarFragment : Fragment() {
+class VehicleViewFragment : Fragment() {
 
     private lateinit var bindingCarFragment: FragmentItemListBinding
-    private lateinit var mAdapter: MyItemCarRecyclerViewAdapter
+    private lateinit var mAdapter: VehicleViewAdapter
     private lateinit var mListRecyclerView: RecyclerView
     lateinit var addCarButton: Button
     lateinit var manager: FragmentManager
@@ -41,7 +41,7 @@ class ItemCarFragment : Fragment() {
         transaction = manager.beginTransaction()
 
         //Lista
-        mAdapter = MyItemCarRecyclerViewAdapter(activity!!, CarContent.ITEMS)
+        mAdapter = VehicleViewAdapter(activity!!, CarContent.ITEMS)
         mAdapter.setOnClickListener(View.OnClickListener {
             val position: Int = mListRecyclerView.getChildAdapterPosition(it)
             Log.i("TEST", ""+ position)
