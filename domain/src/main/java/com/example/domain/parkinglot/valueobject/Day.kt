@@ -15,28 +15,36 @@ class Day {
     
     companion object {
         fun availablesDays(): List<Day>{
-            val listDays: List<Day> = ArrayList()
+            val listDays: ArrayList<Day> = ArrayList()
+            val day = Day()
 
-            listDays[0].identifyDay = Calendar.MONDAY
-            listDays[0].type = TypeOfDay.SPECIAL_DAYD
+            day.identifyDay = Calendar.MONDAY
+            day.type = TypeOfDay.SPECIAL_DAYD
+            listDays.add(day)
 
-            listDays[1].identifyDay = Calendar.TUESDAY
-            listDays[1].type = TypeOfDay.NORMAL_DAY
+            day.identifyDay = Calendar.TUESDAY
+            day.type = TypeOfDay.NORMAL_DAY
+            listDays.add(day)
 
-            listDays[2].identifyDay = Calendar.WEDNESDAY
-            listDays[2].type = TypeOfDay.NORMAL_DAY
+            day.identifyDay = Calendar.WEDNESDAY
+            day.type = TypeOfDay.NORMAL_DAY
+            listDays.add(day)
 
-            listDays[3].identifyDay = Calendar.THURSDAY
-            listDays[3].type = TypeOfDay.NORMAL_DAY
+            day.identifyDay = Calendar.THURSDAY
+            day.type = TypeOfDay.NORMAL_DAY
+            listDays.add(day)
 
-            listDays[4].identifyDay = Calendar.FRIDAY
-            listDays[4].type = TypeOfDay.NORMAL_DAY
+            day.identifyDay = Calendar.FRIDAY
+            day.type = TypeOfDay.NORMAL_DAY
+            listDays.add(day)
 
-            listDays[5].identifyDay = Calendar.SATURDAY
-            listDays[5].type = TypeOfDay.NORMAL_DAY
+            day.identifyDay = Calendar.SATURDAY
+            day.type = TypeOfDay.NORMAL_DAY
+            listDays.add(day)
 
-            listDays[6].identifyDay = Calendar.SUNDAY
-            listDays[6].type = TypeOfDay.SPECIAL_DAYD
+            day.identifyDay = Calendar.SUNDAY
+            day.type = TypeOfDay.SPECIAL_DAYD
+            listDays.add(day)
 
             return listDays
         }
