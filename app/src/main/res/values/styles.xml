@@ -7,4 +7,44 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Componentes personalizados -->
+
+    <!-- Inicio textos -->
+    <style name="MainTittle">
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">@color/main_title_text</item>
+        <item name="android:textSize">@dimen/main_title_text</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubTittle">
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/sub_title_text</item>
+        <item name="android:textSize">@dimen/sub_title_text</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Text">
+        <item name="textAllCaps">false</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/text</item>
+    </style>
+
+    <style name="ButtonText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">@dimen/dialog_button_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="background">@drawable/button_with_borders</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <!--Fin textos-->
+
+    <!-- Fin componentes personalizados -->
+
 </resources>

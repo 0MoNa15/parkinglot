@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parkinglot.R
+import com.example.parkinglot.databinding.ActivityMainBinding
 import com.example.parkinglot.parkinglot.model.ItemBasic
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_CAR
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_INSIDE
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_OUTSIDE
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_PAYMENT
-import com.example.parkinglot.databinding.ActivityMainBinding
+import com.example.parkinglot.vehicle.view.ItemCarFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -55,6 +59,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goFragment(item: ItemBasic) {
+        val manager: FragmentManager = supportFragmentManager
+        val transaction: FragmentTransaction = manager.beginTransaction()
+
         when(item.id){
             POSITION_INSIDE -> {
                 Log.i("TEST", ""+ POSITION_INSIDE)
@@ -64,11 +71,15 @@ class MainActivity : AppCompatActivity() {
             }
             POSITION_CAR -> {
                 Log.i("TEST", ""+ POSITION_CAR)
+                transaction.add(R.id.frameLayoutContainer, ItemCarFragment(), "YOUR_FRAGMENT_STRING_TAG")
             }
             POSITION_PAYMENT -> {
                 Log.i("TEST", ""+ POSITION_PAYMENT)
             }
         }
+
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun createList(): ArrayList<ItemBasic> {

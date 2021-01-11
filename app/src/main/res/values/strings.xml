@@ -5,4 +5,11 @@
     <string name="salida">Salida</string>
     <string name="vehiculos">Vehiculos</string>
     <string name="recaudo">Recaudo</string>
+    <string name="placa">Placa</string>
+    <string name="estado">Estado</string>
+    <string name="fecha">Fecha</string>
+    <string name="ejemplo">Ejemplo</string>
+    <string name="carro">Carro</string>
+    <string name="agregar_carro">Agregar carro</string>
+    <string name="moto">Moto</string>
 </resources>
