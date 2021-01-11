@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.service.VehicleService
 
-class VehicleViewModule @ViewModelInject constructor(var services: VehicleService): ViewModel(){
+class VehicleViewModule@ViewModelInject constructor(var services: VehicleService): ViewModel(){
     private var vehicles = MutableLiveData<ArrayList<Vehicle>>()
 
     init {

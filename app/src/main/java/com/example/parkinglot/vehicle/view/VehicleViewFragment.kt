@@ -11,10 +11,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemListBinding
 import com.example.parkinglot.vehicle.model.CarContent
+import com.example.parkinglot.vehicle.viewmodel.AddCarViewModel
+import com.example.parkinglot.vehicle.viewmodel.VehicleViewModule
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VehicleViewFragment : Fragment() {
 
     private lateinit var bindingCarFragment: FragmentItemListBinding
@@ -23,6 +30,7 @@ class VehicleViewFragment : Fragment() {
     lateinit var addCarButton: Button
     lateinit var manager: FragmentManager
     lateinit var transaction: FragmentTransaction
+    private lateinit var viewModel: VehicleViewModule
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +41,12 @@ class VehicleViewFragment : Fragment() {
         return bindingCarFragment.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
+        observer()
+    }
+
     private fun initialiceWidget(view: View) {
         //Declaraciones
         mListRecyclerView = view.findViewById(R.id.recyclerViewListCar)
@@ -41,7 +55,7 @@ class VehicleViewFragment : Fragment() {
         transaction = manager.beginTransaction()
 
         //Lista
-        mAdapter = VehicleViewAdapter(activity!!, CarContent.ITEMS)
+        mAdapter = VehicleViewAdapter(activity!!.applicationContext, CarContent.ITEMS)
         mAdapter.setOnClickListener(View.OnClickListener {
             val position: Int = mListRecyclerView.getChildAdapterPosition(it)
             Log.i("TEST", ""+ position)
@@ -57,5 +71,17 @@ class VehicleViewFragment : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+    }
+
+    private fun observer() {
+        viewModel.getVehiclesLiveData().observe(activity!!, Observer {
+            showList(it!!)
+        })
+    }
+
+    private fun showList(listVehicles: List<Vehicle>) {
+        mAdapter = VehicleViewAdapter(activity!!.applicationContext, listVehicles)
+        mAdapter.notifyDataSetChanged()
+        mListRecyclerView.adapter = mAdapter
     }
 }

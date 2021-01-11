@@ -46,16 +46,6 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
         return mutableLiveData
     }
 
-    // Guardar por primera vez un carro
-    fun saveCar(car: Car) {
-        repository.insertCar(car)
-    }
-
-    // Guardar por primera vez una moto
-    fun saveMotorcycle(motorcycle: Motorcycle) {
-        repository.insertMotorcycle(motorcycle)
-    }
-
     // Para dar ingreso a un vehiculo al parqueadero
     fun enterANewCar(car: Car): String{
         if (!carLimitValidation(repository.getAmountCar())) {
