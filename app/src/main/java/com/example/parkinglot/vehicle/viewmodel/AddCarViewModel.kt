@@ -61,7 +61,8 @@ class AddCarViewModel@ViewModelInject constructor(var services: VehicleService) 
     }
 
     private fun enterANewCar(car: Car) {
-        when(services.enterANewCar(car)){
+        //when(services.enterANewCar(car)){
+        when(services.saveCar(car)){
             VEHICLE_NO_INSIDE_LIMITED -> {
                 message.value =  "Cupo superado en el parqueadero"
             }

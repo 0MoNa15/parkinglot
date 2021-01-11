@@ -46,15 +46,32 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
         return mutableLiveData
     }
 
+    // Guardar por primera vez un carro
+    fun saveCar(car: Car): String{
+        return if (!carLimitValidation(repository.getAmountCar())) {
+            VEHICLE_NO_INSIDE_LIMITED
+        } else if(licensePlateVerificationForAdmission(car.plateLicensePlate.id)){
+            VEHICLE_NOT_PERMITTED
+        } else {
+            repository.insertCar(car)
+            VEHICLE_OK
+        }
+    }
+
+    // Guardar por primera vez una moto
+    fun saveMotorcycle(motorcycle: Motorcycle) {
+        repository.insertMotorcycle(motorcycle)
+    }
+
     // Para dar ingreso a un vehiculo al parqueadero
     fun enterANewCar(car: Car): String{
-        if (!carLimitValidation(repository.getAmountCar())) {
-            return VEHICLE_NO_INSIDE_LIMITED
+        return if (!carLimitValidation(repository.getAmountCar())) {
+            VEHICLE_NO_INSIDE_LIMITED
         } else if(licensePlateVerificationForAdmission(car.plateLicensePlate.id)){
-            return VEHICLE_NOT_PERMITTED
+            VEHICLE_NOT_PERMITTED
         } else {
             repository.updateStatusCar(changeStateInCar(car, INSIDE_PARKING_LOT))
-            return VEHICLE_OK
+            VEHICLE_OK
         }
     }
 
