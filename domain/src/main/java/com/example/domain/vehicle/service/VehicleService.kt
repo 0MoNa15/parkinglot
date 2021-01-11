@@ -59,8 +59,15 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
     }
 
     // Guardar por primera vez una moto
-    fun saveMotorcycle(motorcycle: Motorcycle) {
-        repository.insertMotorcycle(motorcycle)
+    fun saveMotorcycle(motorcycle: Motorcycle): String{
+        return if (!carLimitValidation(repository.getAmountCar())) {
+            VEHICLE_NO_INSIDE_LIMITED
+        } else if(licensePlateVerificationForAdmission(motorcycle.plateLicensePlate.id)){
+            VEHICLE_NOT_PERMITTED
+        } else {
+            repository.insertMotorcycle(motorcycle)
+            VEHICLE_OK
+        }
     }
 
     // Para dar ingreso a un vehiculo al parqueadero
