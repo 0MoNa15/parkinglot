@@ -12,4 +12,7 @@
     <string name="carro">Carro</string>
     <string name="agregar_carro">Agregar carro</string>
     <string name="moto">Moto</string>
+    <string name="ciudad_de_la_placa">Ciudad de la placa</string>
+    <string name="pereira">Pereira</string>
+    <string name="se_necesita_la_placa">Se necesita la placa</string>
 </resources>
