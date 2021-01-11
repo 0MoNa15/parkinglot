@@ -5,8 +5,9 @@ import com.example.domain.parkinglot.valueobject.Day
 import com.example.domain.vehicle.entity.LicensePlate
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class ParkingLotService {
+class ParkingLotService @Inject constructor() {
     // Funciona 24/7
     // Valor dia, hora
     // Dinero ingresado
