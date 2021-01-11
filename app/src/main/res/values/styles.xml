@@ -25,21 +25,21 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="Text">
+    <style name="Text" parent="TextAppearance.AppCompat.Widget.Button">
         <item name="textAllCaps">false</item>
         <item name="android:maxLines">2</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">@dimen/text</item>
     </style>
 
-    <style name="ButtonText">
+    <style name="ButtonStyle">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">@dimen/dialog_button_text</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="background">@drawable/button_with_borders</item>
+        <item name="android:background">@drawable/button_with_borders</item>
         <item name="textAllCaps">true</item>
     </style>
 
