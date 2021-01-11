@@ -16,6 +16,9 @@ import com.example.domain.vehicle.aggregate.Motorcycle.Companion.SPECIAL_CYLINDE
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.aggregate.Vehicle.Companion.INSIDE_PARKING_LOT
 import com.example.domain.vehicle.aggregate.Vehicle.Companion.OUTSIDE_PARKING_LOT
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_NOT_PERMITTED
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_NO_INSIDE_LIMITED
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_OK
 import com.example.domain.vehicle.repository.VehicleRepository
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -54,12 +57,15 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
     }
 
     // Para dar ingreso a un vehiculo al parqueadero
-    fun enterANewCar(car: Car): Boolean{
-        if (carLimitValidation(repository.getAmountCar()) && licensePlateVerificationForAdmission(car.plateLicensePlate.id)) {
+    fun enterANewCar(car: Car): String{
+        if (!carLimitValidation(repository.getAmountCar())) {
+            return VEHICLE_NO_INSIDE_LIMITED
+        } else if(licensePlateVerificationForAdmission(car.plateLicensePlate.id)){
+            return VEHICLE_NOT_PERMITTED
+        } else {
             repository.updateStatusCar(changeStateInCar(car, INSIDE_PARKING_LOT))
-            return true
+            return VEHICLE_OK
         }
-        return false
     }
 
     fun changeStateInCar(car: Car, state: String): Car {

@@ -9,6 +9,9 @@ import com.example.domain.vehicle.aggregate.Car
 import com.example.domain.vehicle.aggregate.Motorcycle
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.aggregate.Vehicle.Companion.OUTSIDE_PARKING_LOT
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_NOT_PERMITTED
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_NO_INSIDE_LIMITED
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_OK
 import com.example.domain.vehicle.entity.LicensePlate
 import com.example.domain.vehicle.service.VehicleService
 import com.example.parkinglot.generic.Utils
@@ -58,11 +61,17 @@ class AddCarViewModel@ViewModelInject constructor(var services: VehicleService) 
     }
 
     private fun enterANewCar(car: Car) {
-        if (services.enterANewCar(car)) {
-            vehicles.value?.add(car)
-            message.value = "Carro OK"
-        } else {
-            message.value = "no se ha podido agregar el carro"
+        when(services.enterANewCar(car)){
+            VEHICLE_NO_INSIDE_LIMITED -> {
+                message.value =  "Cupo superado en el parqueadero"
+            }
+            VEHICLE_NOT_PERMITTED -> {
+                message.value =  "No está autorizado a ingresar"
+            }
+            VEHICLE_OK -> {
+                vehicles.value?.add(car)
+                message.value = "Carro OK"
+            }
         }
     }
 
