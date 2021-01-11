@@ -52,33 +52,15 @@ class AddCarViewModel@ViewModelInject constructor(var services: VehicleService) 
     }
 
     private fun enterANewMotorcycle(motorcycle: Motorcycle) {
-        when(services.saveMotorcycle(motorcycle)){
-            VEHICLE_NO_INSIDE_LIMITED -> {
-                message.value =  "Cupo superado en el parqueadero"
-            }
-            VEHICLE_NOT_PERMITTED -> {
-                message.value =  "No está autorizado a ingresar"
-            }
-            VEHICLE_OK -> {
-                vehicles.value?.add(motorcycle)
-                message.value = "Moto OK"
-            }
-        }
+        services.saveMotorcycle(motorcycle)
+        vehicles.value?.add(motorcycle)
+        message.value = "Moto OK"
     }
 
     private fun enterANewCar(car: Car) {
-        when(services.saveCar(car)){
-            VEHICLE_NO_INSIDE_LIMITED -> {
-                message.value =  "Cupo superado en el parqueadero"
-            }
-            VEHICLE_NOT_PERMITTED -> {
-                message.value =  "No está autorizado a ingresar"
-            }
-            VEHICLE_OK -> {
-                vehicles.value?.add(car)
-                message.value = "Carro OK"
-            }
-        }
+        services.saveCar(car)
+        vehicles.value?.add(car)
+        message.value = "Carro OK"
     }
 
     fun validateMotorcycleType(isMotorcycle: Boolean){
