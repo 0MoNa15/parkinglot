@@ -54,7 +54,7 @@ class AddCarFragment : Fragment() {
         motorcycleTypeSwitch = view.findViewById(R.id.switchMotorcycleType)
         licensePlateEditText = view.findViewById(R.id.editTextLicensePlate)
         cylinderCapacityEditText = view.findViewById(R.id.editTextCylinderCapacity)
-        savedVehicleButton = view.findViewById(R.id.buttonAddCar)
+        savedVehicleButton = view.findViewById(R.id.buttonAddCarFormulary)
         carTypeSwitch = view.findViewById(R.id.switchCarType)
 
         actionWidget()
