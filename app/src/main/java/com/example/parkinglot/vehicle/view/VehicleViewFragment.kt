@@ -17,7 +17,6 @@ import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemListBinding
 import com.example.parkinglot.vehicle.model.CarContent
-import com.example.parkinglot.vehicle.viewmodel.AddCarViewModel
 import com.example.parkinglot.vehicle.viewmodel.VehicleViewModule
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,7 +66,7 @@ class VehicleViewFragment : Fragment() {
 
         //Botón
         addCarButton.setOnClickListener {
-            transaction.replace(R.id.frameLayoutContainer, AddCarFragment(), "")
+            transaction.replace(R.id.frameLayoutContainer, AddVehicleFragment(), "")
             transaction.addToBackStack(null)
             transaction.commit()
         }

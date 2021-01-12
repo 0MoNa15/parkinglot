@@ -3,10 +3,11 @@ package com.example.parkinglot.vehicle.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.domain.parkinglot.service.ParkingLotService
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.service.VehicleService
 
-class VehicleViewModule@ViewModelInject constructor(var services: VehicleService): ViewModel(){
+class VehicleViewModule@ViewModelInject constructor(var services: ParkingLotService): ViewModel(){
     private var vehicles = MutableLiveData<ArrayList<Vehicle>>()
 
     init {

@@ -1,12 +1,19 @@
 package com.example.domain.parkinglot.service
 
+import androidx.lifecycle.MutableLiveData
 import com.example.domain.parkinglot.entity.ParkingLot
 import com.example.domain.parkinglot.valueobject.Day
 import com.example.domain.vehicle.aggregate.Car
 import com.example.domain.vehicle.aggregate.Motorcycle
 import com.example.domain.vehicle.aggregate.Vehicle
+import com.example.domain.vehicle.aggregate.Vehicle.Companion.OUTSIDE_PARKING_LOT
 import com.example.domain.vehicle.entity.LicensePlate
+import com.example.domain.vehicle.repository.CarRepository
+import com.example.domain.vehicle.repository.MotorcycleRepository
+import com.example.domain.vehicle.repository.VehicleRepository
+import com.example.domain.vehicle.service.CarService
 import com.example.domain.vehicle.service.MotorcycleService
+import com.example.domain.vehicle.service.VehicleService
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -14,39 +21,50 @@ import javax.inject.Inject
 /**
  * Validaciones y reglas de negocio con relación al parqueadero en general
  */
-class ParkingLotService @Inject constructor() {
-    // Funciona 24/7
-    // Valor dia, hora
-    // Dinero ingresado
-    // cantidad max
+class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository, carRepository: CarRepository, motorcycleRepository: MotorcycleRepository) {
+    var mVehicleService: VehicleService = VehicleService(vehicleRepository)
+    var mCarService: CarService = CarService(carRepository)
+    var mMotorcycleService: MotorcycleService = MotorcycleService(motorcycleRepository)
 
-    //private val mMotorcycleService: MotorcycleService = MotorcycleService()
-
-    fun carLimitValidation(currentQuantity: Int): Boolean{
-        if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_CARS)
-            return true
-        return false
-    }
-
-    // 'A' en inicial de la placa solo ingresan los Domingos y Lunes
-    fun licensePlateVerificationForAdmission(licensePlate: String): Boolean {
-        val currentDay = Calendar.DAY_OF_WEEK
-
-        Day.availablesDays().forEach { day ->
-            if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION) &&
-                day.identifyDay == currentDay &&
-                day.type == Day.TypeOfDay.SPECIAL_DAYD){
+    companion object {
+        fun carLimitValidation(currentQuantity: Int): Boolean{
+            if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_CARS)
                 return true
-            }
+            return false
         }
 
-        return false
+        // 'A' en inicial de la placa solo ingresan los Domingos y Lunes
+        fun licensePlateVerificationForAdmission(licensePlate: String): Boolean {
+            val currentDay = Calendar.DAY_OF_WEEK
+
+            Day.availablesDays().forEach { day ->
+                if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION) &&
+                    day.identifyDay == currentDay &&
+                    day.type == Day.TypeOfDay.SPECIAL_DAYD){
+                    return true
+                }
+            }
+
+            return false
+        }
+
+        fun motorcycleLimitValidation(currentQuantity: Int): Boolean{
+            if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_MOTORCYCLES)
+                return true
+            return false
+        }
     }
 
-    fun motorcycleLimitValidation(currentQuantity: Int): Boolean{
-        if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_MOTORCYCLES)
-            return true
-        return false
+    fun getAllVehicles(): MutableLiveData<ArrayList<Vehicle>> {
+        return mVehicleService.getAllVehicles()
+    }
+
+    fun saveMotorcycle(motorcycle: Motorcycle) {
+        mMotorcycleService.saveMotorcycle(motorcycle)
+    }
+
+    fun saveCar(car: Car) {
+        mCarService.saveCar(car)
     }
 
     fun calculateCostToPay(priceByHour: Int, priceByDay: Int, entryDateString: String): Int {
@@ -81,21 +99,21 @@ class ParkingLotService @Inject constructor() {
         return (currentDate.time - entyDate.time).toInt() / divisionInHours
     }
 
-    /*fun exitToAVehicle(vehicle: Vehicle){
+    fun exitToAVehicle(vehicle: Vehicle){
         // Cambiamos el estado del vehiculo
         vehicle.state = OUTSIDE_PARKING_LOT
 
         if (vehicle is Motorcycle) {
-            repository.updateStatusMotorcycle(vehicle)
+            //repository.updateStatusMotorcycle(vehicle)
         } else if (vehicle is Car) {
-            repository.updateStatusCar(vehicle)
+            //repository.updateStatusCar(vehicle)
         }
 
         // Calculamos el valor a pagar del vehiculo
         getCostToPay(vehicle)
 
         // Sumamos el monto obtenido al parqueadero
-    }*/
+    }
 
     // Cuando se quiera sacar el vehiculo, obtendremos el costo final según el tiempo que haya estado allí
     fun getCostToPay(vehicle: Vehicle): Int {

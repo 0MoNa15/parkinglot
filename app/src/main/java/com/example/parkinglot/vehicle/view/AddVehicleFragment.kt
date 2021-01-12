@@ -12,12 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.AddCarFragmentBinding
-import com.example.parkinglot.vehicle.viewmodel.AddCarViewModel
+import com.example.parkinglot.vehicle.viewmodel.AddVehicleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddCarFragment : Fragment() {
-    private lateinit var viewModel: AddCarViewModel
+class AddVehicleFragment : Fragment() {
+    private lateinit var viewModel: AddVehicleViewModel
     private lateinit var bindingAddCarFragment: AddCarFragmentBinding
     lateinit var savedVehicleButton: Button
     lateinit var licensePlateEditText: EditText
@@ -93,7 +93,7 @@ class AddCarFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[AddCarViewModel::class.java]
+        viewModel = ViewModelProvider(this)[AddVehicleViewModel::class.java]
         observer()
     }
 }

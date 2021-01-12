@@ -7,7 +7,6 @@ import com.example.domain.vehicle.repository.CarRepository
 import javax.inject.Inject
 
 class CarService  @Inject constructor(var repository: CarRepository) {
-    private val mParkingLotServices: ParkingLotService = ParkingLotService()
     // Guardar por primera vez un carro
     fun saveCar(car: Car) {
         repository.insertCar(car)
@@ -15,10 +14,7 @@ class CarService  @Inject constructor(var repository: CarRepository) {
 
     // Para dar ingreso a un vehiculo al parqueadero
     fun enterANewCar(car: Car): Boolean{
-        if (mParkingLotServices.carLimitValidation(repository.getAmountCar()) && mParkingLotServices.licensePlateVerificationForAdmission(
-                car.plateLicensePlate.id
-            )
-        ) {
+        if (ParkingLotService.carLimitValidation(repository.getAmountCar()) && ParkingLotService.licensePlateVerificationForAdmission(car.plateLicensePlate.id)) {
             repository.updateStatusCar(changeStateInCar(car, Vehicle.INSIDE_PARKING_LOT))
             return true
         }

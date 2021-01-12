@@ -5,6 +5,7 @@ import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.domain.parkinglot.service.ParkingLotService
 import com.example.domain.vehicle.aggregate.Car
 import com.example.domain.vehicle.aggregate.Motorcycle
 import com.example.domain.vehicle.aggregate.Vehicle
@@ -16,7 +17,7 @@ import com.example.domain.vehicle.entity.LicensePlate
 import com.example.domain.vehicle.service.VehicleService
 import com.example.parkinglot.generic.Utils
 
-class AddCarViewModel@ViewModelInject constructor(var services: VehicleService) : ViewModel() {
+class AddVehicleViewModel@ViewModelInject constructor(var services: ParkingLotService) : ViewModel() {
     private var vehicles = MutableLiveData<ArrayList<Vehicle>>()
     var licensePlateComplete = MutableLiveData<Float>()
     var message = MutableLiveData<String>()
