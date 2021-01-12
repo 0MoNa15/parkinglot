@@ -25,4 +25,8 @@ class MotorcycleService  @Inject constructor(var repository: MotorcycleRepositor
         motorcycle.state = state
         return motorcycle
     }
+
+    fun updateStatusMotorcycleOut(motorcycle: Motorcycle){
+        repository.updateStatusMotorcycle(changeStateInMotorCycle(motorcycle, Vehicle.OUTSIDE_PARKING_LOT))
+    }
 }

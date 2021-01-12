@@ -1,12 +1,12 @@
 package com.example.parkinglot.vehicle.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.vehicle.aggregate.Vehicle
-import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemListBinding
 import com.example.parkinglot.vehicle.model.CarContent
 import com.example.parkinglot.vehicle.viewmodel.VehicleViewModule
 import dagger.hilt.android.AndroidEntryPoint
+import com.example.parkinglot.R
 
 @AndroidEntryPoint
 class VehicleViewFragment : Fragment() {
@@ -49,13 +49,13 @@ class VehicleViewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
         observer()
     }
 
     private fun initialiceWidget(view: View) {
         //Declaraciones
         mAdapter = VehicleViewAdapter(activity!!.applicationContext, CarContent.ITEMS)
-        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
         mListRecyclerView = view.findViewById(R.id.recyclerViewListCar)
         mListRecyclerView.layoutManager = LinearLayoutManager(context)
         addCarButton = view.findViewById(R.id.buttonAddCar)
@@ -74,13 +74,11 @@ class VehicleViewFragment : Fragment() {
                 }
             }
             INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE -> {
-                viewModel.message.value = getString(R.string.si_no_encuentras_debes_agregar)
+                showToast(getString(R.string.si_no_encuentras_debes_agregar))
                 addCarButton.visibility = View.GONE
                 mAdapter.setOnClickListener(View.OnClickListener {
                     val position: Int = mListRecyclerView.getChildAdapterPosition(it)
-                    Log.i("TEST", ""+ position)
-                    // Popup de confirmación
-                    //CarContent.ITEMS[position]
+                    showDialogConfirmationInsideVehicleToParkingLot(CarContent.ITEMS[position])
                 })
             }
         }
@@ -93,13 +91,40 @@ class VehicleViewFragment : Fragment() {
             showList(it!!)
         })
         viewModel.message.observe(activity!!, Observer {
-            Toast.makeText(activity!!, it, Toast.LENGTH_LONG).show()
+            showToast(it)
         })
     }
 
+    private fun showToast(it: String) {
+        Toast.makeText(activity!!, it, Toast.LENGTH_LONG).show()
+    }
+
     private fun showList(listVehicles: List<Vehicle>) {
-        mAdapter = VehicleViewAdapter(activity!!.applicationContext, listVehicles)
+        listVehicles.forEach{
+            CarContent.ITEMS.add(it)
+        }
         mAdapter.notifyDataSetChanged()
-        mListRecyclerView.adapter = mAdapter
+    }
+
+    private fun showDialogConfirmationInsideVehicleToParkingLot(vehicle: Vehicle){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
+        builder.setTitle(getString(R.string.ingreso))
+        builder.setMessage(String.format("%s%s%s%s", getString(R.string.esta_seguro_guardar), " ", vehicle.plateLicensePlate.id, "?"))
+
+        val positiveText = getString(R.string.si)
+        builder.setPositiveButton(positiveText) { dialog, _ ->
+            viewModel.insideNewVehicle(vehicle)
+            viewModel.message.value = getString(R.string.bienvenido)
+            mAdapter.notifyDataSetChanged()
+            dialog.dismiss()
+        }
+
+        val negativeText = getString(R.string.cancelar)
+        builder.setNegativeButton(negativeText) { dialog, _ -> // dismiss dialog, start counter again
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

@@ -25,4 +25,8 @@ class CarService  @Inject constructor(var repository: CarRepository) {
         car.state = state
         return car
     }
+
+    fun updateStatusCarOut(car: Car){
+        repository.updateStatusCar(changeStateInCar(car, Vehicle.OUTSIDE_PARKING_LOT))
+    }
 }

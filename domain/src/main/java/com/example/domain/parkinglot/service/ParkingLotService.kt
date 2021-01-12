@@ -104,9 +104,9 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
         vehicle.state = OUTSIDE_PARKING_LOT
 
         if (vehicle is Motorcycle) {
-            //repository.updateStatusMotorcycle(vehicle)
+            mMotorcycleService.updateStatusMotorcycleOut(vehicle)
         } else if (vehicle is Car) {
-            //repository.updateStatusCar(vehicle)
+            mCarService.updateStatusCarOut(vehicle)
         }
 
         // Calculamos el valor a pagar del vehiculo
@@ -138,5 +138,13 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
             vehicle.dateOfAdmission
         )
         return priceFinal
+    }
+
+    fun enterANewCar(car: Car): Boolean {
+        return mCarService.enterANewCar(car)
+    }
+
+    fun enterANewMotorcycle(motorcycle: Motorcycle): Boolean{
+        return mMotorcycleService.enterANewMotorcycle(motorcycle)
     }
 }
