@@ -33,6 +33,9 @@ class VehicleViewModule@ViewModelInject constructor(var services: ParkingLotServ
             services.enterANewCar(vehicle)
         }
     }
+    fun exitToAVehicle(vehicle: Vehicle): Int{
+        return services.exitToAVehicle(vehicle)
+    }
 
     fun getCostToPay(vehicle: Vehicle): Int {
         return services.getCostToPay(vehicle)

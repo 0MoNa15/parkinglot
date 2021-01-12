@@ -18,6 +18,7 @@ import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_PAYM
 import com.example.parkinglot.vehicle.view.VehicleViewFragment
 import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE
 import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.LIST_VEHICLES_VIEW_TYPE
+import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE
 import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.VIEW_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -76,6 +77,11 @@ class MainActivity : AppCompatActivity() {
             }
             POSITION_OUTSIDE -> {
                 Log.i("TEST", "FUERA"+ POSITION_OUTSIDE)
+                val mFragment = VehicleViewFragment()
+                val data = Bundle()
+                data.putString(VIEW_TYPE, OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE)
+                mFragment.arguments = data
+                transaction.add(R.id.frameLayoutContainer, mFragment, "")
             }
             POSITION_CAR -> {
                 Log.i("TEST", "CARRO"+ POSITION_CAR)

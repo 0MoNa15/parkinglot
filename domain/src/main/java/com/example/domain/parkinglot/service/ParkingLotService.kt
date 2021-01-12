@@ -71,8 +71,7 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
 
     fun calculateCostToPay(priceByHour: Int, priceByDay: Int, entryDateString: String): Int {
         var finalPrice = 0
-        val entryDateInFormatDate: Date =
-            SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.ENGLISH).parse(entryDateString)!!
+        val entryDateInFormatDate: Date = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.ENGLISH).parse(entryDateString)!!
         val hoursInTheParking = convertTimeToHour(entryDateInFormatDate)
 
         when {
@@ -101,7 +100,7 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
         return (currentDate.time - entyDate.time).toInt() / divisionInHours
     }
 
-    fun exitToAVehicle(vehicle: Vehicle){
+    fun exitToAVehicle(vehicle: Vehicle): Int{
         // Cambiamos el estado del vehiculo
         vehicle.state = OUTSIDE_PARKING_LOT
 
@@ -111,10 +110,11 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
             mCarService.updateStatusCarOut(vehicle)
         }
 
-        // Calculamos el valor a pagar del vehiculo
-        getCostToPay(vehicle)
+        // Sumamos el monto obtenido a las ganancias del parqueadero
 
-        // Sumamos el monto obtenido al parqueadero
+        // Calculamos el valor a pagar del vehiculo
+        return getCostToPay(vehicle)
+
     }
 
     // Cuando se quiera sacar el vehiculo, obtendremos el costo final según el tiempo que haya estado allí
@@ -143,10 +143,19 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
     }
 
     fun enterANewCar(car: Car): Boolean {
+        car.dateOfAdmission = currentDate()
         return mCarService.enterANewCar(car)
     }
 
     fun enterANewMotorcycle(motorcycle: Motorcycle): Boolean{
+        motorcycle.dateOfAdmission = currentDate()
         return mMotorcycleService.enterANewMotorcycle(motorcycle)
+    }
+
+    fun currentDate(): String{
+        val stringPatterns = "dd/MM/yyyy HH:mm"
+        val df = SimpleDateFormat(stringPatterns)
+        val dateString = df.format(Date())
+        return dateString
     }
 }

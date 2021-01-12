@@ -18,7 +18,10 @@
     <string name="cilindraje">Cilindraje</string>
     <string name="si_no_encuentras_debes_agregar">El vehiculo debe estar previamente en lista</string>
     <string name="esta_seguro_guardar">¿Seguro quiere ingresar al parqueadero con el vehiculo con placas</string>
+    <string name="esta_seguro_eliminar">Salida del vehiculo con placas</string>
     <string name="bienvenido">¡Bienvenido!</string>
     <string name="cancelar">Cancelar</string>
     <string name="si">Si</string>
+    <string name="salida_exitosa">Salida exitosa</string>
+    <string name="debe_pagar_suma_de">\"Debe pagar la suma de \"</string>
 </resources>

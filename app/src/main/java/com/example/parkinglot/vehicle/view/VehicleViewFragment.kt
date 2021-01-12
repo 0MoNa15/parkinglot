@@ -35,6 +35,7 @@ class VehicleViewFragment : Fragment() {
     companion object {
         const val VIEW_TYPE = "view_type"
         const val INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE = "inside_vehicle_parkinglot_view_type"
+        const val OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE = "outside_vehicle_parkinglot_view_type"
         const val LIST_VEHICLES_VIEW_TYPE = "list_vehicles_view_type"
     }
 
@@ -78,7 +79,14 @@ class VehicleViewFragment : Fragment() {
                 addCarButton.visibility = View.GONE
                 mAdapter.setOnClickListener(View.OnClickListener {
                     val position: Int = mListRecyclerView.getChildAdapterPosition(it)
-                    showDialogConfirmationInsideVehicleToParkingLot(CarContent.ITEMS[position])
+                    showDialogConfirmationVehicleToParkingLot(CarContent.ITEMS[position])
+                })
+            }
+            OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE -> {
+                addCarButton.visibility = View.GONE
+                mAdapter.setOnClickListener(View.OnClickListener {
+                    val position: Int = mListRecyclerView.getChildAdapterPosition(it)
+                    showDialogConfirmationVehicleToParkingLot(CarContent.ITEMS[position])
                 })
             }
         }
@@ -106,17 +114,29 @@ class VehicleViewFragment : Fragment() {
         mAdapter.notifyDataSetChanged()
     }
 
-    private fun showDialogConfirmationInsideVehicleToParkingLot(vehicle: Vehicle){
+    private fun showDialogConfirmationVehicleToParkingLot(vehicle: Vehicle){
         val builder: AlertDialog.Builder = AlertDialog.Builder(activity!!)
         builder.setTitle(getString(R.string.ingreso))
-        builder.setMessage(String.format("%s%s%s%s", getString(R.string.esta_seguro_guardar), " ", vehicle.plateLicensePlate.id, "?"))
+
+        if (mViewType == INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE){
+            builder.setMessage(String.format("%s%s%s%s", getString(R.string.esta_seguro_guardar), " ", vehicle.plateLicensePlate.id, "?"))
+        } else if(mViewType == OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE){
+            builder.setMessage(String.format("%s%s%s%s", getString(R.string.esta_seguro_eliminar), " ", vehicle.plateLicensePlate.id, "."))
+        }
 
         val positiveText = getString(R.string.si)
         builder.setPositiveButton(positiveText) { dialog, _ ->
-            viewModel.insideNewVehicle(vehicle)
-            viewModel.message.value = getString(R.string.bienvenido)
-            mAdapter.notifyDataSetChanged()
-            dialog.dismiss()
+            if (mViewType == INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE){
+                viewModel.insideNewVehicle(vehicle)
+                viewModel.message.value = getString(R.string.bienvenido)
+                mAdapter.notifyDataSetChanged()
+                dialog.dismiss()
+            } else if(mViewType == OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE){
+                //viewModel.message.value = getString(R.string.salida_exitosa)
+                viewModel.message.value = String.format("%s%s", getString(R.string.debe_pagar_suma_de), viewModel.exitToAVehicle(vehicle).toString())
+                mAdapter.notifyDataSetChanged()
+                dialog.dismiss()
+            }
         }
 
         val negativeText = getString(R.string.cancelar)
