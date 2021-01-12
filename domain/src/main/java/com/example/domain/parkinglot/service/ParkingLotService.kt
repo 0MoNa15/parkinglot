@@ -2,44 +2,51 @@ package com.example.domain.parkinglot.service
 
 import com.example.domain.parkinglot.entity.ParkingLot
 import com.example.domain.parkinglot.valueobject.Day
+import com.example.domain.vehicle.aggregate.Car
+import com.example.domain.vehicle.aggregate.Motorcycle
+import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.entity.LicensePlate
+import com.example.domain.vehicle.service.MotorcycleService
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Validaciones y reglas de negocio con relación al parqueadero en general
+ */
 class ParkingLotService @Inject constructor() {
     // Funciona 24/7
     // Valor dia, hora
     // Dinero ingresado
     // cantidad max
 
-    companion object{
-        // 'A' en inicial de la placa solo ingresan los Domingos y Lunes
-        fun licensePlateVerificationForAdmission(licensePlate: String): Boolean {
-            val currentDay = Calendar.DAY_OF_WEEK
+    //private val mMotorcycleService: MotorcycleService = MotorcycleService()
 
-            Day.availablesDays().forEach { day ->
-                if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION) &&
-                    day.identifyDay == currentDay &&
-                    day.type == Day.TypeOfDay.SPECIAL_DAYD){
-                    return true
-                }
+    fun carLimitValidation(currentQuantity: Int): Boolean{
+        if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_CARS)
+            return true
+        return false
+    }
+
+    // 'A' en inicial de la placa solo ingresan los Domingos y Lunes
+    fun licensePlateVerificationForAdmission(licensePlate: String): Boolean {
+        val currentDay = Calendar.DAY_OF_WEEK
+
+        Day.availablesDays().forEach { day ->
+            if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION) &&
+                day.identifyDay == currentDay &&
+                day.type == Day.TypeOfDay.SPECIAL_DAYD){
+                return true
             }
-
-            return false
         }
 
-        fun carLimitValidation(currentQuantity: Int): Boolean{
-            if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_CARS)
-                return true
-            return false
-        }
+        return false
+    }
 
-        fun motorcycleLimitValidation(currentQuantity: Int): Boolean{
-            if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_MOTORCYCLES)
-                return true
-            return false
-        }
+    fun motorcycleLimitValidation(currentQuantity: Int): Boolean{
+        if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_MOTORCYCLES)
+            return true
+        return false
     }
 
     fun calculateCostToPay(priceByHour: Int, priceByDay: Int, entryDateString: String): Int {
@@ -72,5 +79,46 @@ class ParkingLotService @Inject constructor() {
         val currentDate = Date()
         val divisionInHours = 3600000
         return (currentDate.time - entyDate.time).toInt() / divisionInHours
+    }
+
+    /*fun exitToAVehicle(vehicle: Vehicle){
+        // Cambiamos el estado del vehiculo
+        vehicle.state = OUTSIDE_PARKING_LOT
+
+        if (vehicle is Motorcycle) {
+            repository.updateStatusMotorcycle(vehicle)
+        } else if (vehicle is Car) {
+            repository.updateStatusCar(vehicle)
+        }
+
+        // Calculamos el valor a pagar del vehiculo
+        getCostToPay(vehicle)
+
+        // Sumamos el monto obtenido al parqueadero
+    }*/
+
+    // Cuando se quiera sacar el vehiculo, obtendremos el costo final según el tiempo que haya estado allí
+    fun getCostToPay(vehicle: Vehicle): Int {
+        var priceFinal = 0
+        val priceHour: Int
+        val priceDay: Int
+
+        if (vehicle is Motorcycle) {
+            if (vehicle.cylinderCapacity > Motorcycle.SPECIAL_CYLINDER_CAPACITY_FROM)
+                priceFinal += Motorcycle.ADITIONAL_COST_FOR_LARGER_CYLINDER_CAPACITY
+
+            priceDay = Motorcycle.COST_PER_DAY_MOTORCYCLE
+            priceHour = Motorcycle.COST_PER_HOUR_MOTORCYCLE
+        } else {
+            priceDay = Car.COST_PER_DAY
+            priceHour = Car.COST_PER_HOUR
+        }
+
+        priceFinal += calculateCostToPay(
+            priceDay,
+            priceHour,
+            vehicle.dateOfAdmission
+        )
+        return priceFinal
     }
 }
