@@ -120,7 +120,7 @@ class VehicleViewFragment : Fragment() {
         }
 
         val negativeText = getString(R.string.cancelar)
-        builder.setNegativeButton(negativeText) { dialog, _ -> // dismiss dialog, start counter again
+        builder.setNegativeButton(negativeText) { dialog, _ ->
             dialog.dismiss()
         }
 
