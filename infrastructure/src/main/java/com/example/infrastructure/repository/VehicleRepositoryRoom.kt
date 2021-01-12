@@ -14,9 +14,7 @@ import com.example.infrastructure.database.entity.MotorcycleEntity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class VehicleRepositoryRoom @Inject constructor(@ApplicationContext val context: Context):
-    VehicleRepository {
-
+class VehicleRepositoryRoom @Inject constructor(@ApplicationContext val context: Context): VehicleRepository {
     private var appDataBase: AppDataBase? = null
     var mCarDao: CarDao? = null
     var mMotorcycleDao: MotorcycleDao? = null
@@ -27,60 +25,14 @@ class VehicleRepositoryRoom @Inject constructor(@ApplicationContext val context:
         mCarDao = appDataBase?.carDao()
     }
 
-    override fun insertCar(car: Car) {
-        val carEntity = VehicleTranslator.fromModelToEntityCar(car)
-        InsertCarAsynkTask(mCarDao!!).execute(carEntity)
-    }
-
-    override fun updateStatusCar(car: Car){
-        val carEntity = VehicleTranslator.fromModelToEntityCar(car)
-        UpdateStatCarAsynkTask(mCarDao!!).execute(carEntity)
-    }
-
     override fun getAllCars(): List<Car> {
         val array = SelectCarAsynkTask(mCarDao!!).execute().get()
         return VehicleTranslator.fromListCarEntityToListCarModel(array!!)
     }
 
-    override fun getAmountCar(): Int {
-        return CountCarAsynkTask(mCarDao!!).execute().get()
-    }
-
-    override fun insertMotorcycle(motorcycle: Motorcycle) {
-        val motorcycleEntity = VehicleTranslator.fromModelToEntityMotorcycle(motorcycle)
-        InsertMotorAsynkTask(mMotorcycleDao!!).execute(motorcycleEntity)
-    }
-
-    override fun updateStatusMotorcycle(motorcycle: Motorcycle){
-        val motorcycleEntity = VehicleTranslator.fromModelToEntityMotorcycle(motorcycle)
-        UpdateStateMotorcycleAsynkTask(mMotorcycleDao!!).execute(motorcycleEntity)
-    }
-
     override fun getAllMotorcycle(): List<Motorcycle> {
         val array = SelectMotorcycleAsynkTask(mMotorcycleDao!!).execute().get()
         return VehicleTranslator.fromListMotorcycleEntityToListMotorcycleModel(array!!)
-    }
-
-    override fun getAmountMotorcycle(): Int {
-        return CountMotorcycleAsynkTask(mMotorcycleDao!!).execute().get()
-    }
-
-    override fun getCylinderCapacityMotorcycle(id: Int): Int {
-        return CylinderCapacityMotorcycleAsynkTask(mMotorcycleDao!!, id).execute().get()
-    }
-
-    class InsertCarAsynkTask(var carDao: CarDao) : AsyncTask<CarEntity, Void, Void>() {
-        override fun doInBackground(vararg params: CarEntity?): Void? {
-            carDao.insert(params[0]!!)
-            return null
-        }
-    }
-
-    class UpdateStatCarAsynkTask(var carDao: CarDao) : AsyncTask<CarEntity, Void, Void>() {
-        override fun doInBackground(vararg params: CarEntity?): Void? {
-            carDao.updateStatus(params[0]!!)
-            return null
-        }
     }
 
     class SelectCarAsynkTask(var carDao: CarDao) : AsyncTask<Void, Void, List<CarEntity>>() {
@@ -89,41 +41,9 @@ class VehicleRepositoryRoom @Inject constructor(@ApplicationContext val context:
         }
     }
 
-    class CountCarAsynkTask(var carDao: CarDao) : AsyncTask<Void, Void, Int>() {
-        override fun doInBackground(vararg params: Void): Int {
-            return carDao.getAmount()
-        }
-    }
-
-    class InsertMotorAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<MotorcycleEntity, Void, Void>() {
-        override fun doInBackground(vararg params: MotorcycleEntity?): Void? {
-            motorcycleDao.insert(params[0]!!)
-            return null
-        }
-    }
-
-    class UpdateStateMotorcycleAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<MotorcycleEntity, Void, Void>() {
-        override fun doInBackground(vararg params: MotorcycleEntity?): Void? {
-            motorcycleDao.updateStatus(params[0]!!)
-            return null
-        }
-    }
-
     class SelectMotorcycleAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<Void, Void, List<MotorcycleEntity>>() {
         override fun doInBackground(vararg params: Void?): List<MotorcycleEntity> {
             return motorcycleDao.getAll()
-        }
-    }
-
-    class CountMotorcycleAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<Void, Void, Int>() {
-        override fun doInBackground(vararg params: Void): Int {
-            return motorcycleDao.getAmount()
-        }
-    }
-
-    class CylinderCapacityMotorcycleAsynkTask(var motorcycleDao: MotorcycleDao, var id: Int) : AsyncTask<Void, Void, Int>() {
-        override fun doInBackground(vararg params: Void): Int {
-            return motorcycleDao.getCylinderCapacity(id)
         }
     }
 }
