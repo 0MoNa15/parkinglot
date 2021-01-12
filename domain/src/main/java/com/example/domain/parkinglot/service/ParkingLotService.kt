@@ -35,17 +35,19 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
 
         // 'A' en inicial de la placa solo ingresan los Domingos y Lunes
         fun licensePlateVerificationForAdmission(licensePlate: String): Boolean {
-            val currentDay = Calendar.DAY_OF_WEEK
+            val c: Calendar = Calendar.getInstance()
+            val mDate = Date()
+            c.set(mDate.year, mDate.month, mDate.day)
+            val currentDay = c.get(Calendar.DAY_OF_WEEK);
 
             Day.availablesDays().forEach { day ->
-                if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION) &&
-                    day.identifyDay == currentDay &&
-                    day.type == Day.TypeOfDay.SPECIAL_DAYD){
-                    return true
+                if (day.identifyDay == currentDay && day.type == Day.TypeOfDay.NORMAL_DAY) {
+                    if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION)) {
+                            return false
+                    }
                 }
             }
-
-            return false
+            return true
         }
 
         fun motorcycleLimitValidation(currentQuantity: Int): Boolean{
