@@ -31,6 +31,7 @@ open class AddVehicle {
 
     @Test
     fun testAddCar(){
+        //Arrange
         val licensePlate = "TEST"+convertDateInMilliseconds()
         val listItem = 2
 
@@ -45,11 +46,12 @@ open class AddVehicle {
 
     @Test
     fun testAddMotorcycle(){
+        //Arrange
         val licensePlate = "TEST"+convertDateInMilliseconds()
         val cylinder = "400"
         val listItem = 2
 
-        //Actions
+        //Act
         onView(withId(R.id.recyclerViewList)).perform(RecyclerViewActions.actionOnItemAtPosition<VehicleViewAdapter.ViewHolder>(listItem, click()))
         onView(withId(R.id.buttonAddCar)).perform(click())
         onView(withId(R.id.switchMotorcycleType)).perform(click())

@@ -58,6 +58,9 @@ pipeline {
 
         echo "------------>test only<------------"
         sh './gradlew test'
+
+        sh './gradlew --b build.gradle test --scan'
+        sh './gradlew --b build.gradle jacocoTestReport'
       }
     }
 

@@ -12,15 +12,4 @@ import java.util.regex.Pattern.matches
 
 @RunWith(AndroidJUnit4::class)
 open class ListVehicle {
-    /*@get: Rule
-    val activityTest: ActivityScenarioRule<VehicleViewFragment> =
-        ActivityScenarioRule<VehicleViewFragment>(
-            VehicleViewFragment::class.java
-        )
-
-    @Test
-    fun test_isRecyclerViewVisible_onAppLaunch() {
-        onView(withId(R.id.recyclerViewSearchResults)).check(matches(isDisplayed()))
-    }*/
-
 }
