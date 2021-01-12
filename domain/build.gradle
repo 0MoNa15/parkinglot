@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 30
@@ -37,4 +38,16 @@ dependencies {
     // Hilt para integración continua
     kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
     implementation "com.google.dagger:hilt-android:2.28-alpha"
+}
+
+jacoco {
+    toolVersion = '0.8.1'
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Report Jacoco"
+    description = "Allows to Generate Jacoco coverage reports after running tests"
+    reports {
+        xml.enabled = true
+    }
 }

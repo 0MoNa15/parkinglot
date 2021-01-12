@@ -52,13 +52,7 @@ pipeline {
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-        echo "------------>Cleaning<------------"
         sh './gradlew clean'
-
-
-        echo "------------>test only<------------"
-        sh './gradlew test'
-
         sh './gradlew --b build.gradle test --scan'
         sh './gradlew --b build.gradle jacocoTestReport'
       }
@@ -67,7 +61,7 @@ pipeline {
 
     stage('Static Code Analysis') {
       steps{
-        echo '------------>Análisis de código estático<------------'
+        echo '------------>Static code analysis<------------'
         withSonarQubeEnv('Sonar') {
           sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
