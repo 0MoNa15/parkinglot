@@ -1,5 +1,6 @@
 package com.example.domain.parkinglot.service
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.domain.parkinglot.entity.ParkingLot
 import com.example.domain.parkinglot.valueobject.Day
@@ -8,6 +9,8 @@ import com.example.domain.vehicle.aggregate.Motorcycle
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.aggregate.Vehicle.Companion.OUTSIDE_PARKING_LOT
 import com.example.domain.vehicle.entity.LicensePlate
+import com.example.domain.vehicle.entity.LicensePlate.Companion.INITIAL_WITH_SPECIAL_CONDITION
+import com.example.domain.vehicle.entity.LicensePlate.Companion.INITIAL_WITH_SPECIAL_CONDITION_LOWER
 import com.example.domain.vehicle.repository.CarRepository
 import com.example.domain.vehicle.repository.MotorcycleRepository
 import com.example.domain.vehicle.repository.VehicleRepository
@@ -40,10 +43,17 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
             c.set(mDate.year, mDate.month, mDate.day)
             val currentDay = c.get(Calendar.DAY_OF_WEEK);
 
-            Day.availablesDays().forEach { day ->
-                if (day.identifyDay == currentDay && day.type == Day.TypeOfDay.NORMAL_DAY) {
-                    if (licensePlate[0].equals(LicensePlate.INITIAL_WITH_SPECIAL_CONDITION)) {
-                            return false
+            val sdf = SimpleDateFormat("EEEE");
+            val d = Date();
+            val dayOfTheWeek = sdf.format(d)
+
+            var day: Day
+            for (i in 1 until Day.availablesDays().size) {
+                day = Day.availablesDays()[i]
+                if (day.identifyDay == dayOfTheWeek && day.type == Day.TypeOfDay.NORMAL_DAY) {
+                    if (licensePlate[0].equals(INITIAL_WITH_SPECIAL_CONDITION) ||
+                        licensePlate[0].equals(INITIAL_WITH_SPECIAL_CONDITION_LOWER)) {
+                        return false
                     }
                 }
             }

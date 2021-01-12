@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Day {
-    var identifyDay: Int? = null
+    var identifyDay: String? = null
     var type: TypeOfDay? = null
 
     enum class TypeOfDay {
@@ -18,31 +18,31 @@ class Day {
             val listDays: ArrayList<Day> = ArrayList()
             val day = Day()
 
-            day.identifyDay = Calendar.MONDAY
+            day.identifyDay = "Monday"
             day.type = TypeOfDay.SPECIAL_DAYD
             listDays.add(day)
 
-            day.identifyDay = Calendar.TUESDAY
+            day.identifyDay = "Tuesday"
             day.type = TypeOfDay.NORMAL_DAY
             listDays.add(day)
 
-            day.identifyDay = Calendar.WEDNESDAY
+            day.identifyDay = "Wednesday"
             day.type = TypeOfDay.NORMAL_DAY
             listDays.add(day)
 
-            day.identifyDay = Calendar.THURSDAY
+            day.identifyDay = "Thursday"
             day.type = TypeOfDay.NORMAL_DAY
             listDays.add(day)
 
-            day.identifyDay = Calendar.FRIDAY
+            day.identifyDay = "Friday"
             day.type = TypeOfDay.NORMAL_DAY
             listDays.add(day)
 
-            day.identifyDay = Calendar.SATURDAY
+            day.identifyDay = "Saturday"
             day.type = TypeOfDay.NORMAL_DAY
             listDays.add(day)
 
-            day.identifyDay = Calendar.SUNDAY
+            day.identifyDay = "Sunday"
             day.type = TypeOfDay.SPECIAL_DAYD
             listDays.add(day)
 

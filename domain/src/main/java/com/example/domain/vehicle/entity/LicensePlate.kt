@@ -6,5 +6,6 @@ class LicensePlate (
 ){
     companion object {
         const val INITIAL_WITH_SPECIAL_CONDITION = "A"
+        const val INITIAL_WITH_SPECIAL_CONDITION_LOWER = "a"
     }
 }
