@@ -1,5 +1,6 @@
 package com.example.parkinglot.generic
 
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,9 +11,8 @@ class Utils {
         }
 
         fun convertDateInMilliseconds(): Long{
-            val myDate = Date().toString()
-            val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-            val date: Date = sdf.parse(myDate)
+            val date = Date()
+            Log.i("TEST", "MyDate: $date")
             return date.time
         }
     }

@@ -64,17 +64,17 @@ class MainActivity : AppCompatActivity() {
 
         when(item.id){
             POSITION_INSIDE -> {
-                Log.i("TEST", ""+ POSITION_INSIDE)
+                Log.i("TEST", "DENTRO"+ POSITION_INSIDE)
             }
             POSITION_OUTSIDE -> {
-                Log.i("TEST", ""+ POSITION_OUTSIDE)
+                Log.i("TEST", "FUERA"+ POSITION_OUTSIDE)
             }
             POSITION_CAR -> {
-                Log.i("TEST", ""+ POSITION_CAR)
+                Log.i("TEST", "CARRO"+ POSITION_CAR)
                 transaction.add(R.id.frameLayoutContainer, VehicleViewFragment(), "YOUR_FRAGMENT_STRING_TAG")
             }
             POSITION_PAYMENT -> {
-                Log.i("TEST", ""+ POSITION_PAYMENT)
+                Log.i("TEST", "PAGOS"+ POSITION_PAYMENT)
             }
         }
 
