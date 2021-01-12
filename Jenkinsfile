@@ -54,7 +54,7 @@ pipeline {
         echo "------------>Unit Tests<------------"
         sh './gradlew clean'
         sh './gradlew --b build.gradle test --scan'
-        sh './gradlew --b build.gradle jacocoTestReport'
+        //sh './gradlew --b build.gradle jacocoTestReport'
       }
     }
 
