@@ -9,6 +9,7 @@ import com.example.domain.vehicle.service.VehicleService
 
 class VehicleViewModule@ViewModelInject constructor(var services: ParkingLotService): ViewModel(){
     private var vehicles = MutableLiveData<ArrayList<Vehicle>>()
+    var message = MutableLiveData<String>()
 
     init {
         getVehicles()

@@ -16,4 +16,5 @@
     <string name="pereira">Pereira</string>
     <string name="se_necesita_la_placa">Se necesita la placa</string>
     <string name="cilindraje">Cilindraje</string>
+    <string name="si_no_encuentras_debes_agregar">El vehiculo debe estar previamente en lista</string>
 </resources>

@@ -2,17 +2,18 @@ package com.example.parkinglot.vehicle.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemListBinding
@@ -22,14 +23,20 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class VehicleViewFragment : Fragment() {
-
     private lateinit var bindingCarFragment: FragmentItemListBinding
-    private lateinit var mAdapter: VehicleViewAdapter
+    private lateinit var transaction: FragmentTransaction
     private lateinit var mListRecyclerView: RecyclerView
-    lateinit var addCarButton: Button
-    lateinit var manager: FragmentManager
-    lateinit var transaction: FragmentTransaction
     private lateinit var viewModel: VehicleViewModule
+    private lateinit var mAdapter: VehicleViewAdapter
+    private lateinit var manager: FragmentManager
+    private lateinit var addCarButton: Button
+    private lateinit var mViewType: String
+
+    companion object {
+        const val VIEW_TYPE = "view_type"
+        const val INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE = "inside_vehicle_parkinglot_view_type"
+        const val LIST_VEHICLES_VIEW_TYPE = "list_vehicles_view_type"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,39 +49,51 @@ class VehicleViewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
         observer()
     }
 
     private fun initialiceWidget(view: View) {
         //Declaraciones
+        mAdapter = VehicleViewAdapter(activity!!.applicationContext, CarContent.ITEMS)
+        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
         mListRecyclerView = view.findViewById(R.id.recyclerViewListCar)
+        mListRecyclerView.layoutManager = LinearLayoutManager(context)
         addCarButton = view.findViewById(R.id.buttonAddCar)
+        mViewType = arguments!!.getString(VIEW_TYPE)!!
         manager = activity!!.supportFragmentManager
         transaction = manager.beginTransaction()
 
-        //Lista
-        mAdapter = VehicleViewAdapter(activity!!.applicationContext, CarContent.ITEMS)
-        mAdapter.setOnClickListener(View.OnClickListener {
-            val position: Int = mListRecyclerView.getChildAdapterPosition(it)
-            Log.i("TEST", ""+ position)
-            //CarContent.ITEMS[position]
-        })
-
-        mListRecyclerView.layoutManager = LinearLayoutManager(context)
-        mListRecyclerView.adapter = mAdapter
-
-        //Botón
-        addCarButton.setOnClickListener {
-            transaction.replace(R.id.frameLayoutContainer, AddVehicleFragment(), "")
-            transaction.addToBackStack(null)
-            transaction.commit()
+        when(mViewType){
+            LIST_VEHICLES_VIEW_TYPE -> {
+                //Botón
+                addCarButton.visibility = View.VISIBLE
+                addCarButton.setOnClickListener {
+                    transaction.replace(R.id.frameLayoutContainer, AddVehicleFragment(), "")
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                }
+            }
+            INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE -> {
+                viewModel.message.value = getString(R.string.si_no_encuentras_debes_agregar)
+                addCarButton.visibility = View.GONE
+                mAdapter.setOnClickListener(View.OnClickListener {
+                    val position: Int = mListRecyclerView.getChildAdapterPosition(it)
+                    Log.i("TEST", ""+ position)
+                    // Popup de confirmación
+                    //CarContent.ITEMS[position]
+                })
+            }
         }
+
+        mListRecyclerView.adapter = mAdapter
     }
 
     private fun observer() {
         viewModel.getVehiclesLiveData().observe(activity!!, Observer {
             showList(it!!)
+        })
+        viewModel.message.observe(activity!!, Observer {
+            Toast.makeText(activity!!, it, Toast.LENGTH_LONG).show()
         })
     }
 

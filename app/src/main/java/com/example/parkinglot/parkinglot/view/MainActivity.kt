@@ -16,6 +16,9 @@ import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_INSI
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_OUTSIDE
 import com.example.parkinglot.parkinglot.model.ItemBasic.Companion.POSITION_PAYMENT
 import com.example.parkinglot.vehicle.view.VehicleViewFragment
+import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE
+import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.LIST_VEHICLES_VIEW_TYPE
+import com.example.parkinglot.vehicle.view.VehicleViewFragment.Companion.VIEW_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -65,13 +68,22 @@ class MainActivity : AppCompatActivity() {
         when(item.id){
             POSITION_INSIDE -> {
                 Log.i("TEST", "DENTRO"+ POSITION_INSIDE)
+                val mFragment = VehicleViewFragment()
+                val data = Bundle()
+                data.putString(VIEW_TYPE, INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE)
+                mFragment.arguments = data
+                transaction.add(R.id.frameLayoutContainer, mFragment, "")
             }
             POSITION_OUTSIDE -> {
                 Log.i("TEST", "FUERA"+ POSITION_OUTSIDE)
             }
             POSITION_CAR -> {
                 Log.i("TEST", "CARRO"+ POSITION_CAR)
-                transaction.add(R.id.frameLayoutContainer, VehicleViewFragment(), "YOUR_FRAGMENT_STRING_TAG")
+                val mFragment = VehicleViewFragment()
+                val data = Bundle()
+                data.putString(VIEW_TYPE, LIST_VEHICLES_VIEW_TYPE)
+                mFragment.arguments = data
+                transaction.add(R.id.frameLayoutContainer, mFragment, "")
             }
             POSITION_PAYMENT -> {
                 Log.i("TEST", "PAGOS"+ POSITION_PAYMENT)
