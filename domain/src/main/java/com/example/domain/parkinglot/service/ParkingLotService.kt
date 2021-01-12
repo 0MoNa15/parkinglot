@@ -81,7 +81,7 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
             }
             hoursInTheParking < 24 -> {
                 // Se cobran un dia completo si el vehiculo estuvo por más de 9 horas hasta 24 horas
-                finalPrice += hoursInTheParking * priceByDay
+                finalPrice += priceByDay
             }
             else -> {
                 // Se cobra un dia completo por cada 24 horas transcurridas y
@@ -135,8 +135,8 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
         }
 
         priceFinal += calculateCostToPay(
-            priceDay,
             priceHour,
+            priceDay,
             vehicle.dateOfAdmission
         )
         return priceFinal

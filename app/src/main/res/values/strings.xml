@@ -23,5 +23,5 @@
     <string name="cancelar">Cancelar</string>
     <string name="si">Si</string>
     <string name="salida_exitosa">Salida exitosa</string>
-    <string name="debe_pagar_suma_de">\"Debe pagar la suma de \"</string>
+    <string name="debe_pagar_suma_de">Debe pagar la suma de </string>
 </resources>
