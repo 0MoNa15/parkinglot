@@ -35,15 +35,37 @@ class VehicleRepositoryRoom @Inject constructor(@ApplicationContext val context:
         return VehicleTranslator.fromListMotorcycleEntityToListMotorcycleModel(array!!)
     }
 
+    override fun getOnlyCarsEnteredParkingLot(): List<Car> {
+        val array = SelectCarEnteredAsynkTask(mCarDao!!).execute().get()
+        return VehicleTranslator.fromListCarEntityToListCarModel(array!!)
+    }
+
+    override fun getOnlyMotorcyclesEnteredParkingLot(): List<Motorcycle> {
+        val array = SelectMotorcycleEnteredAsynkTask(mMotorcycleDao!!).execute().get()
+        return VehicleTranslator.fromListMotorcycleEntityToListMotorcycleModel(array!!)
+    }
+
     class SelectCarAsynkTask(var carDao: CarDao) : AsyncTask<Void, Void, List<CarEntity>>() {
         override fun doInBackground(vararg params: Void?): List<CarEntity> {
             return carDao.getAll()
         }
     }
 
+    class SelectCarEnteredAsynkTask(var carDao: CarDao) : AsyncTask<Void, Void, List<CarEntity>>() {
+        override fun doInBackground(vararg params: Void?): List<CarEntity> {
+            return carDao.getEntered()
+        }
+    }
+
     class SelectMotorcycleAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<Void, Void, List<MotorcycleEntity>>() {
         override fun doInBackground(vararg params: Void?): List<MotorcycleEntity> {
             return motorcycleDao.getAll()
+        }
+    }
+
+    class SelectMotorcycleEnteredAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<Void, Void, List<MotorcycleEntity>>() {
+        override fun doInBackground(vararg params: Void?): List<MotorcycleEntity> {
+            return motorcycleDao.getEntered()
         }
     }
 }

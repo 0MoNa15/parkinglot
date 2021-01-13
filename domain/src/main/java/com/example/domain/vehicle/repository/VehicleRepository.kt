@@ -9,4 +9,7 @@ import com.example.domain.vehicle.aggregate.Motorcycle
 interface VehicleRepository {
     fun getAllCars(): List<Car>
     fun getAllMotorcycle(): List<Motorcycle>
+
+    fun getOnlyCarsEnteredParkingLot(): List<Car>
+    fun getOnlyMotorcyclesEnteredParkingLot(): List<Motorcycle>
 }

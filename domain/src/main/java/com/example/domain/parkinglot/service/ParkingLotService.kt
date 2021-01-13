@@ -66,6 +66,10 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
         return mVehicleService.getAllVehicles()
     }
 
+    fun getOnlyVehiclesEnteredParkingLot(): MutableLiveData<ArrayList<Vehicle>> {
+        return mVehicleService.getOnlyVehiclesEnteredParkingLot()
+    }
+
     fun saveMotorcycle(motorcycle: Motorcycle) {
         mMotorcycleService.saveMotorcycle(motorcycle)
     }

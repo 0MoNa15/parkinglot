@@ -20,6 +20,10 @@ class VehicleViewModule@ViewModelInject constructor(var services: ParkingLotServ
         vehicles = services.getAllVehicles()
     }
 
+    private fun getOnlyVehiclesEnteredParkingLot() {
+        vehicles = services.getOnlyVehiclesEnteredParkingLot()
+    }
+
     fun getVehiclesLiveData(): MutableLiveData<ArrayList<Vehicle>> {
         return vehicles
     }

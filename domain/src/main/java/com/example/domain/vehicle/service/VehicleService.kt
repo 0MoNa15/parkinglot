@@ -28,4 +28,24 @@ class VehicleService  @Inject constructor(var repository: VehicleRepository) {
 
         return mutableLiveData
     }
+
+    fun getOnlyVehiclesEnteredParkingLot(): MutableLiveData<ArrayList<Vehicle>> {
+        val listMotorcycle: List<Motorcycle> = repository.getOnlyMotorcyclesEnteredParkingLot()
+        val listCar: List<Car> = repository.getOnlyCarsEnteredParkingLot()
+
+        val arrayListVehicles: ArrayList<Vehicle> = ArrayList()
+
+        listCar.forEach { car ->
+            arrayListVehicles.add(car)
+        }
+
+        listMotorcycle.forEach { motorcycle ->
+            arrayListVehicles.add(motorcycle)
+        }
+
+        val mutableLiveData: MutableLiveData<ArrayList<Vehicle>> = MutableLiveData()
+        mutableLiveData.value = arrayListVehicles
+
+        return mutableLiveData
+    }
 }

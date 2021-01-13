@@ -17,6 +17,12 @@ interface CarDao {
     @Query("SELECT * FROM car")
     fun getAll(): List<CarEntity>
 
+    @Query("SELECT * FROM car WHERE state = 'En parqueo'")
+    fun getEntered(): List<CarEntity>
+
+    @Query("SELECT cylinderCapacity FROM motorcycle WHERE id = :mIdMotorcycle")
+    fun getCylinderCapacity(mIdMotorcycle: Int): Int
+
     @Query("SELECT COUNT(*) FROM car")
     fun getAmount(): Int
 }
