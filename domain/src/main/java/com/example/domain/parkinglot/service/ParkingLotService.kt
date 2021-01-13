@@ -1,6 +1,5 @@
 package com.example.domain.parkinglot.service
 
-import androidx.lifecycle.MutableLiveData
 import com.example.domain.parkinglot.entity.ParkingLot
 import com.example.domain.parkinglot.valueobject.Day
 import com.example.domain.vehicle.aggregate.Car
@@ -11,10 +10,8 @@ import com.example.domain.vehicle.entity.LicensePlate.Companion.INITIAL_WITH_SPE
 import com.example.domain.vehicle.entity.LicensePlate.Companion.INITIAL_WITH_SPECIAL_CONDITION_LOWER
 import com.example.domain.vehicle.repository.CarRepository
 import com.example.domain.vehicle.repository.MotorcycleRepository
-import com.example.domain.vehicle.repository.VehicleRepository
 import com.example.domain.vehicle.service.CarService
 import com.example.domain.vehicle.service.MotorcycleService
-import com.example.domain.vehicle.service.VehicleService
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -22,8 +19,7 @@ import javax.inject.Inject
 /**
  * Validaciones y reglas de negocio con relación al parqueadero en general
  */
-class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository, carRepository: CarRepository, motorcycleRepository: MotorcycleRepository) {
-    var mVehicleService: VehicleService = VehicleService(vehicleRepository)
+class ParkingLotService @Inject constructor(carRepository: CarRepository, motorcycleRepository: MotorcycleRepository) {
     var mCarService: CarService = CarService(carRepository)
     var mMotorcycleService: MotorcycleService = MotorcycleService(motorcycleRepository)
 
@@ -62,12 +58,36 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
         }
     }
 
-    fun getAllVehicles(): MutableLiveData<ArrayList<Vehicle>> {
-        return mVehicleService.getAllVehicles()
+    fun getAllVehicles(): ArrayList<Vehicle> {
+        val listCar: ArrayList<Vehicle> = mCarService.getAllVehicles()
+        val listMotorcycle: ArrayList<Vehicle> = mMotorcycleService.getAllVehicles()
+        val arrayListVehicles: ArrayList<Vehicle> = ArrayList()
+
+        listCar.forEach { car ->
+            arrayListVehicles.add(car)
+        }
+
+        listMotorcycle.forEach { motorcycle ->
+            arrayListVehicles.add(motorcycle)
+        }
+
+        return arrayListVehicles
     }
 
-    fun getOnlyVehiclesEnteredParkingLot(): MutableLiveData<ArrayList<Vehicle>> {
-        return mVehicleService.getOnlyVehiclesEnteredParkingLot()
+    fun getOnlyVehiclesEnteredParkingLot(): ArrayList<Vehicle> {
+        val listCar: ArrayList<Vehicle> = mCarService.getOnlyVehiclesEnteredParkingLot()
+        val listMotorcycle: ArrayList<Vehicle> = mMotorcycleService.getOnlyVehiclesEnteredParkingLot()
+        val arrayListVehicles: ArrayList<Vehicle> = ArrayList()
+
+        listCar.forEach { car ->
+            arrayListVehicles.add(car)
+        }
+
+        listMotorcycle.forEach { motorcycle ->
+            arrayListVehicles.add(motorcycle)
+        }
+
+        return arrayListVehicles
     }
 
     fun saveMotorcycle(motorcycle: Motorcycle) {

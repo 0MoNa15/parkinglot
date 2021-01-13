@@ -7,6 +7,27 @@ import com.example.domain.vehicle.repository.MotorcycleRepository
 import javax.inject.Inject
 
 class MotorcycleService  @Inject constructor(var repository: MotorcycleRepository) {
+    fun getAllVehicles(): ArrayList<Vehicle> {
+        val listMotorcycle: List<Motorcycle> = repository.getAllMotorcycle()
+        val arrayListVehicles: ArrayList<Vehicle> = ArrayList()
+
+        listMotorcycle.forEach { motorcycle ->
+            arrayListVehicles.add(motorcycle)
+        }
+
+        return arrayListVehicles
+    }
+
+    fun getOnlyVehiclesEnteredParkingLot(): ArrayList<Vehicle> {
+        val listMotorcycle: List<Motorcycle> = repository.getOnlyMotorcyclesEnteredParkingLot()
+        val arrayListVehicles: ArrayList<Vehicle> = ArrayList()
+
+        listMotorcycle.forEach { motorcycle ->
+            arrayListVehicles.add(motorcycle)
+        }
+
+        return arrayListVehicles
+    }
     // Guardar por primera vez una moto
     fun saveMotorcycle(motorcycle: Motorcycle) {
         repository.insertMotorcycle(motorcycle)

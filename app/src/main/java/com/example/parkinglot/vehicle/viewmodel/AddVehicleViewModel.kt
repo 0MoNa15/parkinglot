@@ -10,11 +10,7 @@ import com.example.domain.vehicle.aggregate.Car
 import com.example.domain.vehicle.aggregate.Motorcycle
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.domain.vehicle.aggregate.Vehicle.Companion.OUTSIDE_PARKING_LOT
-import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_NOT_PERMITTED
-import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_NO_INSIDE_LIMITED
-import com.example.domain.vehicle.aggregate.Vehicle.Companion.VEHICLE_OK
 import com.example.domain.vehicle.entity.LicensePlate
-import com.example.domain.vehicle.service.VehicleService
 import com.example.parkinglot.generic.Utils
 
 class AddVehicleViewModel@ViewModelInject constructor(var services: ParkingLotService) : ViewModel() {

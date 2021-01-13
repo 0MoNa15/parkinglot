@@ -14,7 +14,6 @@ import com.example.domain.vehicle.aggregate.Vehicle.Companion.OUTSIDE_PARKING_LO
 import com.example.domain.vehicle.entity.LicensePlate
 import com.example.domain.vehicle.repository.CarRepository
 import com.example.domain.vehicle.repository.MotorcycleRepository
-import com.example.domain.vehicle.repository.VehicleRepository
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

@@ -38,6 +38,28 @@ class MotorcycleRoom @Inject constructor(@ApplicationContext val context: Contex
         return CylinderCapacityMotorcycleAsynkTask(mMotorcycleDao!!, id).execute().get()
     }
 
+    override fun getAllMotorcycle(): List<Motorcycle> {
+        val array = SelectMotorcycleAsynkTask(mMotorcycleDao!!).execute().get()
+        return VehicleTranslator.fromListMotorcycleEntityToListMotorcycleModel(array!!)
+    }
+
+    override fun getOnlyMotorcyclesEnteredParkingLot(): List<Motorcycle> {
+        val array = SelectMotorcycleEnteredAsynkTask(mMotorcycleDao!!).execute().get()
+        return VehicleTranslator.fromListMotorcycleEntityToListMotorcycleModel(array!!)
+    }
+
+    class SelectMotorcycleAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<Void, Void, List<MotorcycleEntity>>() {
+        override fun doInBackground(vararg params: Void?): List<MotorcycleEntity> {
+            return motorcycleDao.getAll()
+        }
+    }
+
+    class SelectMotorcycleEnteredAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<Void, Void, List<MotorcycleEntity>>() {
+        override fun doInBackground(vararg params: Void?): List<MotorcycleEntity> {
+            return motorcycleDao.getEntered()
+        }
+    }
+
     class InsertMotorAsynkTask(var motorcycleDao: MotorcycleDao) : AsyncTask<MotorcycleEntity, Void, Void>() {
         override fun doInBackground(vararg params: MotorcycleEntity?): Void? {
             motorcycleDao.insert(params[0]!!)
