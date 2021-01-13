@@ -18,7 +18,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-open class AddVehicle {
+open class AddVehicleTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.

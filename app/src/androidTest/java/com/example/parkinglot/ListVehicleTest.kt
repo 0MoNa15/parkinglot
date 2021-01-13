@@ -11,5 +11,5 @@ import org.junit.runner.RunWith
 import java.util.regex.Pattern.matches
 
 @RunWith(AndroidJUnit4::class)
-open class ListVehicle {
+open class ListVehicleTest {
 }

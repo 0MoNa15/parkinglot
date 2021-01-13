@@ -28,12 +28,6 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
     var mMotorcycleService: MotorcycleService = MotorcycleService(motorcycleRepository)
 
     companion object {
-        fun carLimitValidation(currentQuantity: Int): Boolean{
-            if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_CARS)
-                return true
-            return false
-        }
-
         // 'A' en inicial de la placa solo ingresan los Domingos y Lunes
         fun licensePlateVerificationForAdmission(licensePlate: String): Boolean {
             val sdf = SimpleDateFormat("EEEE")
@@ -53,6 +47,12 @@ class ParkingLotService @Inject constructor(vehicleRepository: VehicleRepository
                 }
             }
             return true
+        }
+
+        fun carLimitValidation(currentQuantity: Int): Boolean{
+            if (currentQuantity < ParkingLot.MAXIMUM_QUANTITY_CARS)
+                return true
+            return false
         }
 
         fun motorcycleLimitValidation(currentQuantity: Int): Boolean{
