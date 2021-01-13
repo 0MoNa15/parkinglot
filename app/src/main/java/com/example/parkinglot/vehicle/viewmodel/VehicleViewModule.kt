@@ -12,15 +12,11 @@ class VehicleViewModule@ViewModelInject constructor(var services: ParkingLotServ
     private var vehicles = MutableLiveData<ArrayList<Vehicle>>()
     var message = MutableLiveData<String>()
 
-    init {
-        getVehicles()
-    }
-
-    private fun getVehicles() {
+    fun getVehicles() {
         vehicles = services.getAllVehicles()
     }
 
-    private fun getOnlyVehiclesEnteredParkingLot() {
+    fun getOnlyVehiclesEnteredParkingLot() {
         vehicles = services.getOnlyVehiclesEnteredParkingLot()
     }
 

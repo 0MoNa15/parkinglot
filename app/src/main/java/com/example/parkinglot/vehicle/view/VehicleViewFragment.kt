@@ -45,24 +45,21 @@ class VehicleViewFragment : Fragment() {
     ): View? {
         bindingCarFragment = FragmentItemListBinding.inflate(layoutInflater)
         initialiceWidget(bindingCarFragment.root)
-        return bindingCarFragment.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
         observer()
+        return bindingCarFragment.root
     }
 
     private fun initialiceWidget(view: View) {
         //Declaraciones
         mAdapter = VehicleViewAdapter(activity!!.applicationContext, CarContent.ITEMS)
+        viewModel = ViewModelProvider(this)[VehicleViewModule::class.java]
         mListRecyclerView = view.findViewById(R.id.recyclerViewListCar)
         mListRecyclerView.layoutManager = LinearLayoutManager(context)
         addCarButton = view.findViewById(R.id.buttonAddCar)
         mViewType = arguments!!.getString(VIEW_TYPE)!!
         manager = activity!!.supportFragmentManager
         transaction = manager.beginTransaction()
+        mListRecyclerView.adapter = mAdapter
 
         when(mViewType){
             LIST_VEHICLES_VIEW_TYPE -> {
@@ -73,6 +70,7 @@ class VehicleViewFragment : Fragment() {
                     transaction.addToBackStack(null)
                     transaction.commit()
                 }
+                viewModel.getVehicles()
             }
             INSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE -> {
                 showToast(getString(R.string.si_no_encuentras_debes_agregar))
@@ -81,6 +79,7 @@ class VehicleViewFragment : Fragment() {
                     val position: Int = mListRecyclerView.getChildAdapterPosition(it)
                     showDialogConfirmationVehicleToParkingLot(CarContent.ITEMS[position])
                 })
+                viewModel.getVehicles()
             }
             OUTSIDE_VEHICLE_PARKINGLOT_VIEW_TYPE -> {
                 addCarButton.visibility = View.GONE
@@ -88,10 +87,10 @@ class VehicleViewFragment : Fragment() {
                     val position: Int = mListRecyclerView.getChildAdapterPosition(it)
                     showDialogConfirmationVehicleToParkingLot(CarContent.ITEMS[position])
                 })
+                mListRecyclerView.adapter = mAdapter
+                viewModel.getOnlyVehiclesEnteredParkingLot()
             }
         }
-
-        mListRecyclerView.adapter = mAdapter
     }
 
     private fun observer() {
@@ -108,6 +107,8 @@ class VehicleViewFragment : Fragment() {
     }
 
     private fun showList(listVehicles: List<Vehicle>) {
+        CarContent.ITEMS.clear()
+
         listVehicles.forEach{
             CarContent.ITEMS.add(it)
         }
