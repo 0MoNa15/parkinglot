@@ -1,6 +1,8 @@
 package com.example.parkinglot
 
 import androidx.lifecycle.MutableLiveData
+import com.example.domain.parkinglot.entity.ParkingLot.Companion.MAXIMUM_QUANTITY_CARS
+import com.example.domain.parkinglot.entity.ParkingLot.Companion.MAXIMUM_QUANTITY_MOTORCYCLES
 import com.example.domain.parkinglot.service.ParkingLotService
 import com.example.domain.parkinglot.service.ParkingLotService.Companion.licensePlateVerificationForAdmission
 import com.example.domain.parkinglot.valueobject.Day
@@ -17,6 +19,7 @@ import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,24 +32,24 @@ class BusinessLogicRulesTest {
     private lateinit var mMotorcycle: Motorcycle
     private lateinit var mLicensePlate: LicensePlate
     @Mock
-    val vehicleRepository: VehicleRepository =
+    val mVehicleRepository: VehicleRepository =
         mock(VehicleRepository::class.java)
 
     @Mock
-    val carRepository: CarRepository =
+    val mCarRepository: CarRepository =
         mock(CarRepository::class.java)
 
     @Mock
-    val motorcycleRepository: MotorcycleRepository =
+    val mMotorcycleRepository: MotorcycleRepository =
         mock(MotorcycleRepository::class.java)
 
     @Before
     fun init() {
-        mParkingLotService = ParkingLotService(vehicleRepository, carRepository, motorcycleRepository)
-
+        mParkingLotService = ParkingLotService(mVehicleRepository, mCarRepository, mMotorcycleRepository)
+        
         mLicensePlate = LicensePlate(Date().time.toString(), "Pereira")
         mCar = Car(mLicensePlate, OUTSIDE_PARKING_LOT, "11/01/2021 07:00")
-
+        
         mLicensePlate = LicensePlate(Date().time.toString(), "Pereira")
         mMotorcycle = Motorcycle(mLicensePlate, OUTSIDE_PARKING_LOT, "10/01/2021 07:00", 100)
     }
@@ -58,14 +61,15 @@ class BusinessLogicRulesTest {
     @Test
     fun test(){
         // Arrange
-        var correctData = false
+        var result = false
 
         // Act
-        correctData = true
+        result = true
 
         // Assert
-        assertEquals(true, correctData)
+        assertEquals(true, result)
     }
+
     /** Se deben tener dos dias especiales el Lunes y el Domingo */
     @Test
     fun testDaysList(){
@@ -129,34 +133,6 @@ class BusinessLogicRulesTest {
         assertEquals(true, correctData)
     }*/
 
-    /** Solo permita ingresar 20 carros */
-    @Test
-    fun validationMaxCarTest(){
-        // Arrange
-        // Se puede validar con el estado de los vehiculos
-        var correctData = false
-
-        // Act
-        correctData = true
-
-        // Assert
-        assertEquals(true, correctData)
-    }
-
-    /** Solo permita ingresar 10 motos */
-    @Test
-    fun validationMaxMotorcycleTest(){
-        // Arrange
-        // Se puede validar con el estado de los vehiculos
-        var correctData = false
-
-        // Act
-        correctData = true
-
-        // Assert
-        assertEquals(true, correctData)
-    }
-
     /** Verificar que el almacenamiento de un carro esté funcionando correctamente */
     @Test
     fun saveCarSimulationTest() {
@@ -167,14 +143,14 @@ class BusinessLogicRulesTest {
         var vehicle : Vehicle
         mLicensePlate = LicensePlate(Date().time.toString(), "Pereira")
         mCar = Car(mLicensePlate, OUTSIDE_PARKING_LOT, "11/01/2021 07:00")
-
+        
         //Act
         mParkingLotService.saveCar(mCar)
         mList = mParkingLotService.getAllVehicles()
-
+        
         if (mList.value != null && mList.value!!.isNotEmpty()) {
             listEvaluate = mList.value!!
-
+            
             for (i in 0 until listEvaluate.size) {
                 vehicle = listEvaluate[i]
                 if (vehicle.plateLicensePlate.id == mCar.plateLicensePlate.id) {
@@ -216,5 +192,32 @@ class BusinessLogicRulesTest {
         //Assert
         assertEquals(true, result)
     }
+    
+    /** Limitante de carros máximo dentro del parqueadero */
+    @Test
+    fun notAllowedEnterForCarBySpaceTest(){
+        // Arrange
+        `when`(mCarRepository.getAmountCar()).thenReturn(MAXIMUM_QUANTITY_CARS)
+        var result: Boolean
 
+        // Act
+        result = mParkingLotService.mCarService.enterANewCar(mCar)
+
+        // Assert
+        assertEquals(false, result)
+    }
+
+    /** Limitante de motos máximo dentro del parqueadero */
+    @Test
+    fun notAllowedEnterForMotorcycleBySpaceTest(){
+        // Arrange
+        `when`(mMotorcycleRepository.getAmountMotorcycle()).thenReturn(MAXIMUM_QUANTITY_MOTORCYCLES)
+        var result: Boolean
+
+        // Act
+        result = mParkingLotService.mMotorcycleService.enterANewMotorcycle(mMotorcycle)
+
+        // Assert
+        assertEquals(false, result)
+    }
 }
