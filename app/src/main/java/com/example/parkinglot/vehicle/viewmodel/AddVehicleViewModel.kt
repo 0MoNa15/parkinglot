@@ -32,14 +32,14 @@ class AddVehicleViewModel@ViewModelInject constructor(var services: ParkingLotSe
         } else if (carType){
             //Guardar carro
             Log.i("TEST", "Carro")
-            enterANewCar(Car(LicensePlate(licensePlate, licensePlateCity), OUTSIDE_PARKING_LOT, ""))
+            enterANewCar(Car(LicensePlate(Utils.convertTextToUpperCase(licensePlate), licensePlateCity), OUTSIDE_PARKING_LOT, ""))
         } else if (motorcycleType){
             //Guardar moto
             Log.i("TEST", "Moto")
             if (!Utils.validateString(cylinderCapacity)){
                 message.value = "se_necesita_el_cilindraje"
             } else {
-                enterANewMotorcycle(Motorcycle(LicensePlate(licensePlate, licensePlateCity), OUTSIDE_PARKING_LOT, "", cylinderCapacity.toInt()))
+                enterANewMotorcycle(Motorcycle(LicensePlate(Utils.convertTextToUpperCase(licensePlate), licensePlateCity), OUTSIDE_PARKING_LOT, "", cylinderCapacity.toInt()))
             }
         }
     }

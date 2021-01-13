@@ -15,5 +15,9 @@ class Utils {
             Log.i("TEST", "MyDate: $date")
             return date.time
         }
+
+        fun convertTextToUpperCase(text: String): String{
+            return text.toUpperCase()
+        }
     }
 }

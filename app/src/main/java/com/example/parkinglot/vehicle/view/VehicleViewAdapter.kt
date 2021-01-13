@@ -50,7 +50,7 @@ class VehicleViewAdapter(
         private val dateFixedTextView: TextView = view.root.findViewById(R.id.textViewDate)
 
         fun addItem(vehicle: Vehicle) {
-            licensePlateTextView.text = String.format("%s%s%s", vehicle.plateLicensePlate.id, " - ", vehicle.plateLicensePlate.city)
+            licensePlateTextView.text = String.format("%s%s%s", Utils.convertTextToUpperCase(vehicle.plateLicensePlate.id), " - ", vehicle.plateLicensePlate.city)
             titleTextView.text = if (vehicle is Car) mContext.getString(R.string.carro) else mContext.getString(R.string.moto)
             stateTextView.text = vehicle.state
 
