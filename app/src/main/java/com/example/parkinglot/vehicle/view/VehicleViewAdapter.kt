@@ -10,6 +10,7 @@ import com.example.domain.vehicle.aggregate.Car
 import com.example.domain.vehicle.aggregate.Vehicle
 import com.example.parkinglot.R
 import com.example.parkinglot.databinding.FragmentItemBinding
+import com.example.parkinglot.generic.Utils
 
 class VehicleViewAdapter(
     private val mContext: Context,
@@ -46,12 +47,18 @@ class VehicleViewAdapter(
         private val licensePlateTextView: TextView = view.root.findViewById(R.id.textViewLicensePlateEdditable1)
         private val stateTextView: TextView = view.root.findViewById(R.id.textViewStateEdditable)
         private val dateTextView: TextView = view.root.findViewById(R.id.textViewDateEdditable)
+        private val dateFixedTextView: TextView = view.root.findViewById(R.id.textViewDate)
 
         fun addItem(vehicle: Vehicle) {
-            titleTextView.text = if (vehicle is Car) mContext.getString(R.string.carro) else mContext.getString(R.string.moto)
             licensePlateTextView.text = String.format("%s%s%s", vehicle.plateLicensePlate.id, " - ", vehicle.plateLicensePlate.city)
+            titleTextView.text = if (vehicle is Car) mContext.getString(R.string.carro) else mContext.getString(R.string.moto)
             stateTextView.text = vehicle.state
-            dateTextView.text = vehicle.dateOfAdmission
+
+            if(Utils.validateString(vehicle.dateOfAdmission)) {
+                dateTextView.visibility = View.VISIBLE
+                dateFixedTextView.visibility = View.VISIBLE
+                dateTextView.text = vehicle.dateOfAdmission
+            }
         }
     }
 }

@@ -81,12 +81,14 @@ class AddVehicleFragment : Fragment() {
             run {
                 viewModel.validateMotorcycleType(isChecked)
                 carTypeSwitch.isChecked = !isChecked
+                savedVehicleButton.text = getString(R.string.agregar_moto)
             }
         }
 
         carTypeSwitch.setOnCheckedChangeListener { _, isChecked ->
             run {
                 motorcycleTypeSwitch.isChecked = !isChecked
+                savedVehicleButton.text = getString(R.string.agregar_carro)
             }
         }
     }

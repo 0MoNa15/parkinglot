@@ -24,4 +24,6 @@
     <string name="si">Si</string>
     <string name="salida_exitosa">Salida exitosa</string>
     <string name="debe_pagar_suma_de">Debe pagar la suma de </string>
+    <string name="pr_simamente">Próximamente</string>
+    <string name="agregar_moto">Agregar moto</string>
 </resources>

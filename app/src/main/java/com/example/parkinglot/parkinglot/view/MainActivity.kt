@@ -3,6 +3,7 @@ package com.example.parkinglot.parkinglot.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -93,6 +94,7 @@ class MainActivity : AppCompatActivity() {
             }
             POSITION_PAYMENT -> {
                 Log.i("TEST", "PAGOS"+ POSITION_PAYMENT)
+                Toast.makeText(this, getString(R.string.pr_simamente), Toast.LENGTH_SHORT).show()
             }
         }
 
