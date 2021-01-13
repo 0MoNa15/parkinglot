@@ -48,8 +48,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     //Pruebas
-    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+    testImplementation 'org.mockito:mockito-core:3.3.3'
+    testImplementation 'junit:junit:4.12'
 
     // Hilt para inyección de dependencias
     kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
