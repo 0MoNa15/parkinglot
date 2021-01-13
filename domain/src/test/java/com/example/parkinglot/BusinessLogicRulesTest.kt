@@ -1,6 +1,5 @@
 package com.example.parkinglot
 
-import androidx.lifecycle.MutableLiveData
 import com.example.domain.parkinglot.entity.ParkingLot.Companion.MAXIMUM_QUANTITY_CARS
 import com.example.domain.parkinglot.entity.ParkingLot.Companion.MAXIMUM_QUANTITY_MOTORCYCLES
 import com.example.domain.parkinglot.service.ParkingLotService
@@ -30,9 +29,6 @@ class BusinessLogicRulesTest {
     private lateinit var mCar: Car
     private lateinit var mMotorcycle: Motorcycle
     private lateinit var mLicensePlate: LicensePlate
-    @Mock
-    val mVehicleRepository: VehicleRepository =
-        mock(VehicleRepository::class.java)
 
     @Mock
     val mCarRepository: CarRepository =
@@ -44,7 +40,7 @@ class BusinessLogicRulesTest {
 
     @Before
     fun init() {
-        mParkingLotService = ParkingLotService(mVehicleRepository, mCarRepository, mMotorcycleRepository)
+        mParkingLotService = ParkingLotService(mCarRepository, mMotorcycleRepository)
         
         mLicensePlate = LicensePlate(Date().time.toString(), "Pereira")
         mCar = Car(mLicensePlate, OUTSIDE_PARKING_LOT, "11/01/2021 07:00")
@@ -136,7 +132,7 @@ class BusinessLogicRulesTest {
     @Test
     fun saveCarSimulationTest() {
         //Arrange
-        val mList: MutableLiveData<ArrayList<Vehicle>>
+        val mList: ArrayList<Vehicle>
         val listEvaluate : ArrayList<Vehicle>
         var result = false
         var vehicle : Vehicle
@@ -147,8 +143,8 @@ class BusinessLogicRulesTest {
         mParkingLotService.saveCar(mCar)
         mList = mParkingLotService.getAllVehicles()
         
-        if (mList.value != null && mList.value!!.isNotEmpty()) {
-            listEvaluate = mList.value!!
+        if (mList != null && mList.isNotEmpty()) {
+            listEvaluate = mList
             
             for (i in 0 until listEvaluate.size) {
                 vehicle = listEvaluate[i]
@@ -166,7 +162,7 @@ class BusinessLogicRulesTest {
     @Test
     fun saveMotorcycleSimulationTest() {
         //Arrange
-        val mList: MutableLiveData<ArrayList<Vehicle>>
+        val mList: ArrayList<Vehicle>
         val listEvaluate : ArrayList<Vehicle>
         var result = false
         var vehicle : Vehicle
@@ -177,8 +173,8 @@ class BusinessLogicRulesTest {
         mParkingLotService.saveMotorcycle(mMotorcycle)
         mList = mParkingLotService.getAllVehicles()
 
-        if (mList.value != null && mList.value!!.isNotEmpty()) {
-            listEvaluate = mList.value!!
+        if (mList != null && mList.isNotEmpty()) {
+            listEvaluate = mList
 
             for (i in 0 until listEvaluate.size) {
                 vehicle = listEvaluate[i]
