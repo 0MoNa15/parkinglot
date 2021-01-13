@@ -1,6 +1,5 @@
 package com.example.domain.parkinglot.valueobject
 
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Day {
