@@ -40,34 +40,32 @@ pipeline {
     }
 
 
+    stage('Build') {
+      steps {
+        echo "------------>Build<------------"
+        sh 'chmod +x ./gradlew'
+        sh './gradlew build -x test'
+      }
+    }
+
+
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-        sh 'chmod +x ./gradlew'
-        echo "------------>Cleaning<------------"
         sh './gradlew clean'
-
-
-        echo "------------>test only<------------"
         sh './gradlew test'
+        sh './gradlew tasks'
+        //sh './gradlew jacocoTestReport'
       }
     }
 
 
     stage('Static Code Analysis') {
       steps{
-        echo '------------>Análisis de código estático<------------'
+        echo '------------>Static code analysis<------------'
         withSonarQubeEnv('Sonar') {
           sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
-      }
-    }
-
-
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        sh './gradlew build -x test'
       }
     }
   }

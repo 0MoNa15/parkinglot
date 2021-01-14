@@ -1,3 +1,30 @@
 <resources>
-    <string name="app_name">ParkingLot</string>
+    <string name="app_name">Parking Attendant</string>
+    <string name="no_autorizado_ingresar">No está autorizado a ingresar</string>
+    <string name="ingreso">Ingreso</string>
+    <string name="salida">Salida</string>
+    <string name="vehiculos">Vehiculos</string>
+    <string name="recaudo">Recaudo</string>
+    <string name="placa">Placa</string>
+    <string name="estado">Estado</string>
+    <string name="fecha">Fecha de ingreso</string>
+    <string name="ejemplo">Ejemplo</string>
+    <string name="carro">Carro</string>
+    <string name="agregar_carro">Agregar carro</string>
+    <string name="moto">Moto</string>
+    <string name="ciudad_de_la_placa">Ciudad de la placa</string>
+    <string name="pereira">Pereira</string>
+    <string name="se_necesita_la_placa">Se necesita la placa</string>
+    <string name="cilindraje">Cilindraje</string>
+    <string name="si_no_encuentras_debes_agregar">El vehiculo debe estar previamente en lista</string>
+    <string name="esta_seguro_guardar">¿Seguro quiere ingresar al parqueadero con el vehiculo con placas</string>
+    <string name="esta_seguro_eliminar">Salida del vehiculo con placas</string>
+    <string name="bienvenido">¡Bienvenido!</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="si">Si</string>
+    <string name="salida_exitosa">Salida exitosa</string>
+    <string name="debe_pagar_suma_de">Debe pagar la suma de </string>
+    <string name="pr_simamente">Próximamente</string>
+    <string name="agregar_moto">Agregar moto</string>
+    <string name="agregar_vehiculo">Agregar vehiculo</string>
 </resources>
