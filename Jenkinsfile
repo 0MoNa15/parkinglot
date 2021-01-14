@@ -55,7 +55,7 @@ pipeline {
         sh './gradlew clean'
         sh './gradlew test'
         sh './gradlew tasks'
-        //sh './gradlew jacocoTestReport'
+        sh './gradlew jacocoTestReport'
       }
     }
 

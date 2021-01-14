@@ -50,22 +50,6 @@ class BusinessLogicRulesTest {
         mMotorcycle = Motorcycle(mLicensePlate, OUTSIDE_PARKING_LOT, "10/01/2021 07:00", 100)
     }
 
-
-    //Plantilla
-
-    /** Qué hará la prueba */
-    @Test
-    fun test(){
-        // Arrange
-        var result = false
-
-        // Act
-        result = true
-
-        // Assert
-        assertEquals(true, result)
-    }
-
     /** Se deben tener dos dias especiales el Monday y el Sunday */
     @Test
     fun testDaysList(){
@@ -113,6 +97,35 @@ class BusinessLogicRulesTest {
         
         // Assert
         assertEquals(true, correctData)
+    }
+
+
+    /** Limitante de carros máximo dentro del parqueadero */
+    @Test
+    fun notAllowedEnterForCarBySpaceTest(){
+        // Arrange
+        `when`(mCarRepository.getAmountCar()).thenReturn(MAXIMUM_QUANTITY_CARS)
+        var result: Boolean
+
+        // Act
+        result = mParkingLotService.mCarService.enterANewCar(mCar)
+
+        // Assert
+        assertEquals(false, result)
+    }
+
+    /** Limitante de motos máximo dentro del parqueadero */
+    @Test
+    fun notAllowedEnterForMotorcycleBySpaceTest(){
+        // Arrange
+        `when`(mMotorcycleRepository.getAmountMotorcycle()).thenReturn(MAXIMUM_QUANTITY_MOTORCYCLES)
+        val result: Boolean
+
+        // Act
+        result = mParkingLotService.mMotorcycleService.enterANewMotorcycle(mMotorcycle)
+
+        // Assert
+        assertEquals(false, result)
     }
 
     /** Verificar que el almacenamiento de un carro esté funcionando correctamente */
@@ -174,32 +187,4 @@ class BusinessLogicRulesTest {
         //Assert
         assertEquals(true, result)
     }*/
-    
-    /** Limitante de carros máximo dentro del parqueadero */
-    @Test
-    fun notAllowedEnterForCarBySpaceTest(){
-        // Arrange
-        `when`(mCarRepository.getAmountCar()).thenReturn(MAXIMUM_QUANTITY_CARS)
-        var result: Boolean
-
-        // Act
-        result = mParkingLotService.mCarService.enterANewCar(mCar)
-
-        // Assert
-        assertEquals(false, result)
-    }
-
-    /** Limitante de motos máximo dentro del parqueadero */
-    @Test
-    fun notAllowedEnterForMotorcycleBySpaceTest(){
-        // Arrange
-        `when`(mMotorcycleRepository.getAmountMotorcycle()).thenReturn(MAXIMUM_QUANTITY_MOTORCYCLES)
-        var result: Boolean
-
-        // Act
-        result = mParkingLotService.mMotorcycleService.enterANewMotorcycle(mMotorcycle)
-
-        // Assert
-        assertEquals(false, result)
-    }
 }
