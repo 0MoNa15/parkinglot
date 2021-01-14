@@ -36,8 +36,9 @@ class ParkingLotService @Inject constructor(carRepository: CarRepository, motorc
             for (i in 0 until Day.availablesDays().size) {
                 day = mList[i]
                 if (day.identifyDay == dayOfTheWeek && day.type == Day.TypeOfDay.NORMAL_DAY) {
-                    if (licensePlate[0].equals(INITIAL_WITH_SPECIAL_CONDITION) ||
-                        licensePlate[0].equals(INITIAL_WITH_SPECIAL_CONDITION_LOWER)) {
+                    var letter :String = licensePlate[0].toString()
+                    if (letter.equals(INITIAL_WITH_SPECIAL_CONDITION) ||
+                        letter.equals(INITIAL_WITH_SPECIAL_CONDITION_LOWER)) {
                         return false
                     }
                 }
