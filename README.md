@@ -43,5 +43,5 @@ Project purpose is architecture not UI, feel free to do a PR to change it
 
 # Support 😄
 
-If this repo helped you , you can join the [MoNa15](https://github.com/Zorayda) for this repo ⭐
+If this repo helped you , you can join the [MoNa15](https://github.com/0MoNa15) for this repo ⭐
 
